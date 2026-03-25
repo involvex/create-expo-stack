@@ -7,7 +7,7 @@ type ExistsResult = false | 'dir' | 'file' | 'other';
 export async function validateProjectName(
   exists: (path: string) => ExistsResult,
   removeAsync: (path?: string) => Promise<void>,
-  prompt: GluegunPrompt | null,
+  _prompt: GluegunPrompt | null,
   projectName: string,
   overwrite: boolean
 ): Promise<void> {

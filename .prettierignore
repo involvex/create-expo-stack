@@ -10,7 +10,9 @@
 .gitignore
 .husky/pre-commit
 .prettierignore
+bun.lock
 bun.lockb
 LICENSE
+**/.vscode/*.json
 cli/__tests__/__snapshots__/*
 README.md

@@ -1,7 +1,7 @@
 // import figlet from "figlet";
 import gradient from "gradient-string";
 
-import { expoStackTheme, TITLE_TEXT } from "../constants.js";
+import { expoStackTheme } from "../constants.js";
 
 const asciiTitle = `
                           _

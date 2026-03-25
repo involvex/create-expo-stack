@@ -1,5 +1,4 @@
 import color from "picocolors";
-import util from "util";
 
 import { DEFAULT_STYLING_PACAKGE } from "../constants.js";
 
@@ -57,26 +56,20 @@ export function printOutput(cliResults) {
   //	check if packages includes package with name "supabase"
   if (authenticationPackage && authenticationPackage.name === "supabase") {
     return `${color.green(`\nSuccess! 🎉  Now, here's what's next:`)}
-    \n${color.blue(
-      "Head over to https://database.new to create a new Supabase project.",
-    )}
+    \n${color.blue("Head over to https://database.new to create a new Supabase project.")}
     \n${color.blue(`Get the Project URL and anon key from the API settings:`)}
     \n1. Go to the API settings page in the Dashboard.
     \n2. Find your Project URL, anon, and service_role keys on this page.
     \n3. Copy these keys and paste them into your .env file.
     \n4. Optionally, follow one of these guides to get started with Supabase:
     \n${color.blue(`https://docs.expo.dev/guides/using-supabase/#next-steps`)}
-    \n${color.green(
-      `Once you're done, run the following to get started: `,
-    )}\n\n${stepsToRunProject}`;
+    \n${color.green(`Once you're done, run the following to get started: `)}\n\n${stepsToRunProject}`;
   } else if (
     authenticationPackage &&
     authenticationPackage.name === "firebase"
   ) {
     return `\n${color.green(`\nSuccess! 🎉  Now, here's what's next:`)}
-    \n${color.blue(
-      "Head over to https://console.firebase.google.com/ to create a new Firebase project.",
-    )}
+    \n${color.blue("Head over to https://console.firebase.google.com/ to create a new Firebase project.")}
     \n${color.blue(`Get the API key and other unique identifiers:`)}
     \n1. Register a web app in your Firebase project:
     \n${color.blue(`https://firebase.google.com/docs/web/setup#register-app`)};
@@ -84,12 +77,8 @@ export function printOutput(cliResults) {
     \n3. Copy these keys and paste them into your .env file.
     \n4. Optionally, follow one of these guides to get started with Firebase:
     \n${color.blue(`https://docs.expo.dev/guides/using-firebase/#next-steps`)}
-    \n${color.green(
-      `Once you're done, run the following to get started: `,
-    )}\n\n${stepsToRunProject}`;
+    \n${color.green(`Once you're done, run the following to get started: `)}\n\n${stepsToRunProject}`;
   } else {
-    return `${color.green(
-      `\nSuccess! 🎉  Now, just run the following to get started: `,
-    )}\n\n${stepsToRunProject}`;
+    return `${color.green(`\nSuccess! 🎉  Now, just run the following to get started: `)}\n\n${stepsToRunProject}`;
   }
 }

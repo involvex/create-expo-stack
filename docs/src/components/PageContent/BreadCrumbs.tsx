@@ -23,16 +23,15 @@ export default function BreadCrumbs() {
     ? window.location.pathname.slice(0, -1)
     : window.location.pathname;
 
-  const slug =
+  const slug = (
     pathname.slice(1).split("/").length > 2
       ? pathname.slice(1).split("/")[1]
-      : "" || "";
+      : ""
+  ) as SlugType;
 
   const actualEntries =
     SIDEBAR[lang][
-      slugToEntryPath(
-        slug === undefined || slug === "" ? "" : (slug as SlugType),
-      )
+      slugToEntryPath(slug === undefined || slug === "" ? "" : slug)
     ];
 
   const getPathNameFromLink = (link: string) => {

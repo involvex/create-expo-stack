@@ -3,16 +3,23 @@
   "private": true,
   "version": "0.0.0",
   "description": "Root package for the create-expo-stack monorepo",
+  "funding": {
+    "url": "https://github.com/sponsors/involvex"
+  },
+  "author": "involvex",
   "repository": {
     "type": "git",
-    "url": "https://github.com/roninoss/create-expo-stack.git"
+    "url": "https://github.com/involvex/create-expo-stack.git"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/involvex"
   },
   "license": "MIT",
   "workspaces": [
     "cli",
     "www",
-    "docs",
-    "packages/rn-new"
+    "packages/rn-new",
+    "docs"
   ],
   "scripts": {
     "build": "turbo build",
@@ -37,30 +44,32 @@
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
-    "@changesets/cli": "^2.26.2",
+    "@changesets/cli": "^2.30.0",
     "@changesets/get-release-plan": "^3.0.17",
-    "@typescript-eslint/eslint-plugin": "^6.11.0",
-    "@typescript-eslint/parser": "^6.11.0",
-    "bun-types": "^1.0.14",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "bun-types": "^1.3.11",
     "copyfiles": "^2.4.1",
-    "eslint": "^8.53.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "husky": "^5.1.3",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-prettier": "^5.5.5",
+    "husky": "^5.2.0",
     "is-ci": "^3.0.1",
     "lint-staged": "^12.5.0",
-    "octokit": "^3.1.2",
-    "prettier": "^3.1.0",
-    "turbo": "^1.11.3",
+    "octokit": "^3.2.2",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "turbo": "^1.13.4",
     "typescript": "latest"
   },
-  "packageManager": "bun@1.2.11",
+  "packageManager": "bun@1.3.11",
   "dependencies": {
     "@clack/prompts": "^0.7.0",
-    "expo": "~53.0.6",
+    "expo": "~55.0.8",
     "lucide-astro": "^0.395.0",
-    "picocolors": "^1.0.0",
-    "google-auth-library": "^9.11.0",
-    "googleapis": "^140.0.0"
+    "picocolors": "^1.1.1",
+    "google-auth-library": "^9.15.1",
+    "googleapis": "^140.0.1"
   }
 }

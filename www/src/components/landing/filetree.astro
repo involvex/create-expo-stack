@@ -8,7 +8,7 @@ const files = await glob(["demo/**/*"], {
   onlyFiles: true,
 });
 
-export const filetree = {};
+export const filetree: any = {};
 for (const file of files) {
   const contents = readFileSync(file, "utf8");
   const paths = file.replace("demo/", "").split("/").filter(Boolean);

@@ -8,7 +8,7 @@ myHeaders.append("Content-Type", "application/json");
 const fetchURL = "https://dlp.rn.new";
 
 export async function initializeProject(cliResults) {
-  const formattedCliResults = JSON.stringify(cliResults, (key, value) =>
+  const formattedCliResults = JSON.stringify(cliResults, (_key, value) =>
     typeof value === "string" ? value.replace(/'/g, '"') : value,
   );
 

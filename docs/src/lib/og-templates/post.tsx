@@ -1,4 +1,3 @@
-import { SITE } from "../../consts";
 import type { CollectionEntry } from "astro:content";
 
 export default (post: CollectionEntry<"docs">) => {

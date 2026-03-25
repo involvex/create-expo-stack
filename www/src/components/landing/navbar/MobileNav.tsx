@@ -14,21 +14,15 @@ export default function MobileNav() {
       <button
         id="burger"
         onClick={() => setOpen(!open)}
-        className={`z-50 flex items-center ${
-          open ? "fixed" : "absolute"
-        } justify-center sm:hidden right-3 top-2.5 p-2`}
+        className={`z-50 flex items-center ${open ? "fixed" : "absolute"} justify-center sm:hidden right-3 top-2.5 p-2`}
       >
         <div className="h-6 w-6 relative">
           <X
-            className={`duration-300 ${
-              open ? "rotate-0 opacity-100" : "-rotate-45 opacity-0"
-            }`}
+            className={`duration-300 ${open ? "rotate-0 opacity-100" : "-rotate-45 opacity-0"}`}
             size={24}
           />
           <Menu
-            className={`duration-300 absolute top-0 ${
-              open ? "rotate-45 opacity-0" : "rotate-0 opacity-100"
-            }`}
+            className={`duration-300 absolute top-0 ${open ? "rotate-45 opacity-0" : "rotate-0 opacity-100"}`}
             size={24}
           />
         </div>

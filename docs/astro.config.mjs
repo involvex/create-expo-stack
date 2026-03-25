@@ -21,7 +21,7 @@ export default defineConfig({
     }),
     react(),
     mdx(),
-    sitemap(),
+    // sitemap()
   ],
   markdown: {
     remarkPlugins: [remarkCodeTitles],

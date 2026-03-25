@@ -7,7 +7,7 @@ const verifyRepoDeleted = (repoName: string): boolean => {
   try {
     execSync(`gh repo view ${repoName}`, { stdio: 'ignore' });
     return false; // Repository still exists
-  } catch (e) {
+  } catch (_e) {
     return true; // Repository is deleted
   }
 };
@@ -21,7 +21,7 @@ export const publishToGitHub = async (toolbox: GluegunToolbox, projectName: stri
     // Check if gh CLI is installed
     try {
       execSync('gh --version', { stdio: 'ignore' });
-    } catch (e) {
+    } catch (_e) {
       error('\nGitHub CLI (gh) is not installed.');
       info('Please install it from: https://cli.github.com/');
       info('Then run: gh auth login');
@@ -37,7 +37,7 @@ export const publishToGitHub = async (toolbox: GluegunToolbox, projectName: stri
         info('  gh auth refresh -h github.com -s delete_repo');
         return null;
       }
-    } catch (e) {
+    } catch (_e) {
       error('\nYou are not authenticated with GitHub CLI.');
       info('Please run: gh auth login');
       return null;
@@ -85,11 +85,11 @@ export const publishToGitHub = async (toolbox: GluegunToolbox, projectName: stri
           error('\nFailed to delete existing repository. Please try again later or use a different name.');
           return null;
         }
-      } catch (e) {
+      } catch (_e) {
         error('\nFailed to delete existing repository. Please try again later or use a different name.');
         return null;
       }
-    } catch (e) {
+    } catch (_e) {
       error('\nFailed to check if repository exists.');
       return null;
     }
@@ -106,7 +106,7 @@ export const publishToGitHub = async (toolbox: GluegunToolbox, projectName: stri
     info('\nCreating new repository...');
     try {
       execSync(`gh repo create ${projectName} --${visibilityResponse.visibility}`, { stdio: 'pipe' });
-    } catch (e) {
+    } catch (_e) {
       error('\nFailed to create new repository.');
       return null;
     }
@@ -146,12 +146,12 @@ export const publishToGitHub = async (toolbox: GluegunToolbox, projectName: stri
 
         // Remove existing remote
         execSync('git remote remove origin', { stdio: 'ignore' });
-      } catch (e) {
+      } catch (_e) {
         // Remote doesn't exist, continue
       }
 
       execSync(`git remote add origin https://github.com/${username}/${projectName}.git`, { stdio: 'ignore' });
-    } catch (e) {
+    } catch (_e) {
       error(`\nFailed to set remote URL. ${e.message}`);
       return null;
     }
@@ -160,7 +160,7 @@ export const publishToGitHub = async (toolbox: GluegunToolbox, projectName: stri
     info('\nPushing code to the new repository...');
     try {
       execSync(`git push -u origin ${execSync('git rev-parse --abbrev-ref HEAD')}`, { stdio: 'ignore' });
-    } catch (e) {
+    } catch (_e) {
       error(`\nFailed to push code to the new repository. ${e.message}`);
       return null;
     }

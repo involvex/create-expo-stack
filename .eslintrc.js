@@ -3,6 +3,7 @@
  */
 module.exports = {
   parser: '@typescript-eslint/parser',
+  ignorePatterns: ['build', 'dist', 'node_modules', 'bin'],
 
   parserOptions: {
     ecmaVersion: 2020,

@@ -41,12 +41,7 @@ async function main() {
 
   console.log(
     color.blue(
-      `Your project configuration:\n${util.inspect(
-        cliResults,
-        false,
-        null,
-        true /* enable colors */,
-      )}`,
+      `Your project configuration:\n${util.inspect(cliResults, false, null, true /* enable colors */)}`,
     ),
   );
 

@@ -5,7 +5,6 @@ import { Button } from "../ui/button";
 import { Menu } from "lucide-react";
 import { ScrollArea } from "../ui/scroll-area";
 import { SIDEBAR } from "@/consts";
-import { cn } from "@/lib/utils";
 
 // Define the MobileNav component
 export default function MobileNav() {

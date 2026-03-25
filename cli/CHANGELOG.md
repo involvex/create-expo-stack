@@ -875,7 +875,6 @@
 ### Patch Changes
 
 - [`026b97e`](https://github.com/roninoss/create-expo-stack/commit/026b97ee02f370ee1ee10dad9877b540a3c623d7) Thanks [@danstepanov](https://github.com/danstepanov)! - - symlink README
-
   - add shortlink for discord
   - update contributors
   - add header labels and descriptor to README

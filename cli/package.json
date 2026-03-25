@@ -23,10 +23,10 @@
   "scripts": {
     "build": "bun run clean-build && bun run compile && bun run copy-templates && bun run lint-templates",
     "bump": "bun run ./src/utilities/bumpVersion.ts",
-    "clean-build": "rm -rf ./build",
+    "clean-build": "del-cli ./build",
     "compile": "tsc -p .",
     "copy-templates": "bun run copyfiles -u 2 -a \"./src/templates/**/*\" ./build/templates",
-    "dev": "bun run build && NODE_ENV=development bun run bin/create-expo-stack.js",
+    "dev": "bun run build && cross-env NODE_ENV=development bun run bin/create-expo-stack.js",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix --resolve-plugins-relative-to . && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
     "lint-templates": "bun run ejslint ./src/templates",
     "prepublishOnly": "bun run build",
@@ -34,8 +34,8 @@
     "snapshot-update": "bun test --bail=1 --timeout 160000 --update-snapshots",
     "test:watch": "bun test --watch",
     "test": "bun test --bail=1 --timeout 160000",
-    "test:skip-snapshots": "INCLUDE_REACT_NAVIGATION_TESTS=1 SKIP_SNAPSHOTS=1 bun test bun test --bail=1 --timeout 160000",
-    "test:all": "ALL_PACKAGE_MANAGERS=true bun test --bail=1 --timeout 160000"
+    "test:skip-snapshots": "cross-env INCLUDE_REACT_NAVIGATION_TESTS=1 SKIP_SNAPSHOTS=1 bun test bun test --bail=1 --timeout 160000",
+    "test:all": "cross-env ALL_PACKAGE_MANAGERS=true bun test --bail=1 --timeout 160000"
   },
   "prettier": {
     "arrowParens": "always",
@@ -51,7 +51,7 @@
   "dependencies": {
     "@clack/prompts": "^0.11.0",
     "ejs-lint": "^2.0.0",
-    "expo": "^54.0.6",
+    "expo": "^55.0.0",
     "figlet": "^1.6.0",
     "gluegun": "latest",
     "google-auth-library": "^9.11.0",
@@ -68,7 +68,8 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "husky": "^5.1.3",
-    "prettier": "^3.1.0"
+    "prettier": "^3.1.0",
+    "del-cli": "^7.0.0"
   },
   "publishConfig": {
     "provenance": false

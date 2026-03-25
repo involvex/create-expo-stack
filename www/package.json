@@ -29,6 +29,7 @@
     "@webcontainer/api": "^1.1.9",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "fast-glob": "^3.3.2",
     "lucide-react": "^0.298.0",
     "p-defer": "^4.0.1",
     "picocolors": "^1.0.0",

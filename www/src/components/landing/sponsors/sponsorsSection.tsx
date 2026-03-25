@@ -18,7 +18,8 @@ export default function SponsorsSection() {
             >
               becoming a sponsor
             </a>
-            . <br /> Your logo will show up here with a link to your website.{" "}
+            . <br /> Your logo will show up here with a link to your
+            website.{" "}
           </span>
         </div>
       </div>
