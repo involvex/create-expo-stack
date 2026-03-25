@@ -152,7 +152,7 @@ export const publishToGitHub = async (toolbox: GluegunToolbox, projectName: stri
 
       execSync(`git remote add origin https://github.com/${username}/${projectName}.git`, { stdio: 'ignore' });
     } catch (_e) {
-      error(`\nFailed to set remote URL. ${e.message}`);
+      error(`\nFailed to set remote URL. ${_e.message}`);
       return null;
     }
 
@@ -161,7 +161,7 @@ export const publishToGitHub = async (toolbox: GluegunToolbox, projectName: stri
     try {
       execSync(`git push -u origin ${execSync('git rev-parse --abbrev-ref HEAD')}`, { stdio: 'ignore' });
     } catch (_e) {
-      error(`\nFailed to push code to the new repository. ${e.message}`);
+      error(`\nFailed to push code to the new repository. ${_e.message}`);
       return null;
     }
 
