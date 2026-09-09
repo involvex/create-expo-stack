@@ -51,8 +51,8 @@
   "dependencies": {
     "@clack/prompts": "^1.2.0",
     "ejs-lint": "^2.0.0",
-    "expo": "^55.0.15",
-    "figlet": "^1.6.0",
+    "expo": "^57.0.21",
+    "figlet": "^1.11.4",
     "gluegun": "latest",
     "google-auth-library": "^9.11.0",
     "googleapis": "^140.0.0",
@@ -68,7 +68,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "husky": "^5.1.3",
-    "prettier": "^3.8.2",
+    "prettier": "^3.9.6",
     "del-cli": "^7.0.0"
   },
   "publishConfig": {
