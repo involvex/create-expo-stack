@@ -5,12 +5,10 @@
     "strict": true,
     "baseUrl": ".",
       "paths": {
-        <% if (props.stylingPackage?.name === 'nativewindui') { %>
-          "@/*": ["./*"]
-        <% } else if (props.flags.importAlias === true) { %>
-          "@/*": ["*"]
+        <% if (typeof props.flags.importAlias === 'string') { %>
+          "<%= props.flags.importAlias %>": ["./*"]
         <% } else { %>
-          "<%= props.flags.importAlias %>": ["src/*"]
+          "@/*": ["./*"]
         <% } %>
     }
     <% } else { %>

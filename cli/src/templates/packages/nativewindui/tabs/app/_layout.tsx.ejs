@@ -1,7 +1,6 @@
 import '../global.css';
 import 'expo-dev-client';
 import { ThemeProvider as NavThemeProvider } from '@react-navigation/native';
-import { Icon } from '@roninoss/icons';
 <% if (props.stylingPackage?.options.selectedComponents.includes('action-sheet')) { %>
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 <% } %>
@@ -15,7 +14,7 @@ import { Pressable, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 <% } %>
 
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { ThemeToggle } from '@/components/nativewindui/ThemeToggle';
 import { cn } from '@/lib/cn';
 import { useColorScheme, useInitialAndroidBarSync } from '@/lib/useColorScheme';
 import { NAV_THEME } from '@/theme';
@@ -48,6 +47,18 @@ export default function RootLayout() {
             <Stack screenOptions={SCREEN_OPTIONS}>
               <Stack.Screen name="(tabs)" options={TABS_OPTIONS} />
               <Stack.Screen name="modal" options={MODAL_OPTIONS} />
+              <% if (props.stylingPackage?.options?.pagePresets?.includes('settings')) { %>
+              <Stack.Screen name="settings" options={{ title: 'Settings' }} />
+              <% } %>
+              <% if (props.stylingPackage?.options?.pagePresets?.includes('profile')) { %>
+              <Stack.Screen name="profile" options={{ title: 'Profile' }} />
+              <% } %>
+              <% if (props.stylingPackage?.options?.pagePresets?.includes('login')) { %>
+              <Stack.Screen name="login" options={{ title: 'Login' }} />
+              <% } %>
+              <% if (props.stylingPackage?.options?.pagePresets?.includes('signup')) { %>
+              <Stack.Screen name="signup" options={{ title: 'Signup' }} />
+              <% } %>
             </Stack>
           </NavThemeProvider>
         <% if (props.stylingPackage?.options.selectedComponents.includes('action-sheet')) { %>

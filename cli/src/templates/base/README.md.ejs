@@ -20,17 +20,97 @@ In the output, you'll find options to open the app in a development client, a [d
 
 ## Project structure
 
+<% if (props.navigationPackage?.name === "expo-router") { %>
 ```
-├── app.{tsx, ts}
+├── app/
+<% if (props.navigationPackage?.options?.type === "stack") { %>
+│   ├── _layout.tsx
+│   ├── index.tsx
+│   ├── details.tsx
+│   ├── modal.tsx
+│   └── +not-found.tsx
+<% } else if (props.navigationPackage?.options?.type === "tabs") { %>
+│   ├── _layout.tsx
+│   ├── modal.tsx
+│   ├── +not-found.tsx
+│   └── (tabs)/
+│       ├── _layout.tsx
+│       ├── index.tsx
+│       └── two.tsx
+<% } else { %>
+│   ├── _layout.tsx
+│   ├── modal.tsx
+│   ├── +not-found.tsx
+│   └── (drawer)/
+│       ├── _layout.tsx
+│       ├── index.tsx
+│       └── (tabs)/
+<% } %>
+├── components/
+<% if (props.authenticationPackage?.name === "supabase" || props.authenticationPackage?.name === "firebase") { %>
+├── utils/
+<% } %>
 ├── app.json
 ├── babel.config.js
 ├── package.json
 └── tsconfig.json
 ```
+<% } else if (props.navigationPackage?.name === "react-navigation") { %>
+```
+├── App.tsx
+├── navigation/
+├── screens/
+├── components/
+<% if (props.authenticationPackage?.name === "supabase" || props.authenticationPackage?.name === "firebase") { %>
+├── utils/
+<% } %>
+├── app.json
+├── babel.config.js
+├── package.json
+└── tsconfig.json
+```
+<% } else { %>
+```
+├── App.tsx
+├── components/
+<% if (props.authenticationPackage?.name === "supabase" || props.authenticationPackage?.name === "firebase") { %>
+├── utils/
+<% } %>
+├── app.json
+├── babel.config.js
+├── package.json
+└── tsconfig.json
+```
+<% } %>
 
 ## Learn more
 
 - [Expo documentation](https://docs.expo.dev/)
 - [React Native documentation](https://reactnative.dev/docs/getting-started)
+<% if (props.navigationPackage?.name === "expo-router") { %>
+- [Expo Router documentation](https://docs.expo.dev/router/introduction/)
+<% } %>
+<% if (props.navigationPackage?.name === "react-navigation") { %>
 - [React Navigation documentation](https://reactnavigation.org/docs/getting-started)
+<% } %>
+<% if (props.stylingPackage?.name === "nativewind") { %>
 - [NativeWind documentation](https://www.nativewind.dev/)
+<% } %>
+<% if (props.stylingPackage?.name === "nativewindui") { %>
+- [NativeWindUI documentation](https://nativewindui.com/)
+<% } %>
+<% if (props.stylingPackage?.name === "unistyles") { %>
+- [Unistyles documentation](https://react-native-unistyles.vercel.app/)
+<% } %>
+<% if (props.authenticationPackage?.name === "supabase") { %>
+- [Supabase documentation](https://supabase.com/docs)
+<% } %>
+<% if (props.authenticationPackage?.name === "firebase") { %>
+- [Firebase documentation](https://firebase.google.com/docs)
+<% } %>
+<% if (props.internalizationPackage?.name === "i18next") { %>
+- [i18next documentation](https://www.i18next.com/)
+<% } %>
+<% if (props.stateManagementPackage?.name === "zustand") { %>
+- [Zustand documentation](https://zustand.docs.pmnd.rs/)
+<% } %>

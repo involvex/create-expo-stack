@@ -1,9 +1,21 @@
 <% if (props.navigationPackage?.options.type === 'stack') { %>
   import { createStaticNavigation, StaticParamList } from '@react-navigation/native';
   import { createStackNavigator } from '@react-navigation/stack';
-  import Overview from '../screens/overview';
-  import Details from '../screens/details';
-  import { BackButton } from '../components/BackButton';
+  import Overview from '@/screens/overview';
+  import Details from '@/screens/details';
+  import { BackButton } from '@/components/BackButton';
+  <% if (props.stylingPackage?.options?.pagePresets?.includes('settings')) { %>
+  import SettingsPage from '@/components/Settings';
+  <% } %>
+  <% if (props.stylingPackage?.options?.pagePresets?.includes('profile')) { %>
+  import ProfilePage from '@/components/Profile';
+  <% } %>
+  <% if (props.stylingPackage?.options?.pagePresets?.includes('login')) { %>
+  import LoginPage from '@/components/Login';
+  <% } %>
+  <% if (props.stylingPackage?.options?.pagePresets?.includes('signup')) { %>
+  import SignupPage from '@/components/Signup';
+  <% } %>
 
   const Stack = createStackNavigator({
     screens: {
@@ -16,6 +28,38 @@
           headerLeft: () => <BackButton onPress={navigation.goBack} />,
         }),
       },
+      <% if (props.stylingPackage?.options?.pagePresets?.includes('settings')) { %>
+      Settings: {
+        screen: SettingsPage,
+        options: {
+          title: 'Settings',
+        },
+      },
+      <% } %>
+      <% if (props.stylingPackage?.options?.pagePresets?.includes('profile')) { %>
+      Profile: {
+        screen: ProfilePage,
+        options: {
+          title: 'Profile',
+        },
+      },
+      <% } %>
+      <% if (props.stylingPackage?.options?.pagePresets?.includes('login')) { %>
+      Login: {
+        screen: LoginPage,
+        options: {
+          title: 'Login',
+        },
+      },
+      <% } %>
+      <% if (props.stylingPackage?.options?.pagePresets?.includes('signup')) { %>
+      Signup: {
+        screen: SignupPage,
+        options: {
+          title: 'Signup',
+        },
+      },
+      <% } %>
     },
   });
 
@@ -34,8 +78,20 @@
 <% } else if (props.navigationPackage?.options.type === 'tabs') { %>
   import { createStaticNavigation, StaticParamList } from '@react-navigation/native';
   import { createStackNavigator } from '@react-navigation/stack';
-  import Modal from '../screens/modal';
+  import Modal from '@/screens/modal';
   import TabNavigator from './tab-navigator';
+  <% if (props.stylingPackage?.options?.pagePresets?.includes('settings')) { %>
+  import SettingsPage from '@/components/Settings';
+  <% } %>
+  <% if (props.stylingPackage?.options?.pagePresets?.includes('profile')) { %>
+  import ProfilePage from '@/components/Profile';
+  <% } %>
+  <% if (props.stylingPackage?.options?.pagePresets?.includes('login')) { %>
+  import LoginPage from '@/components/Login';
+  <% } %>
+  <% if (props.stylingPackage?.options?.pagePresets?.includes('signup')) { %>
+  import SignupPage from '@/components/Signup';
+  <% } %>
 
   const Stack = createStackNavigator({
     screens: {
@@ -52,6 +108,38 @@
           headerLeft: () => null,
         },
       },
+      <% if (props.stylingPackage?.options?.pagePresets?.includes('settings')) { %>
+      Settings: {
+        screen: SettingsPage,
+        options: {
+          title: 'Settings',
+        },
+      },
+      <% } %>
+      <% if (props.stylingPackage?.options?.pagePresets?.includes('profile')) { %>
+      Profile: {
+        screen: ProfilePage,
+        options: {
+          title: 'Profile',
+        },
+      },
+      <% } %>
+      <% if (props.stylingPackage?.options?.pagePresets?.includes('login')) { %>
+      Login: {
+        screen: LoginPage,
+        options: {
+          title: 'Login',
+        },
+      },
+      <% } %>
+      <% if (props.stylingPackage?.options?.pagePresets?.includes('signup')) { %>
+      Signup: {
+        screen: SignupPage,
+        options: {
+          title: 'Signup',
+        },
+      },
+      <% } %>
     },
   });
 
@@ -70,8 +158,20 @@
 <% } else if (props.navigationPackage?.options.type === 'drawer + tabs') { %>
   import { createStaticNavigation, StaticParamList } from '@react-navigation/native';
   import { createStackNavigator } from '@react-navigation/stack';
-  import Modal from '../screens/modal';
+  import Modal from '@/screens/modal';
   import DrawerNavigator from './drawer-navigator';
+  <% if (props.stylingPackage?.options?.pagePresets?.includes('settings')) { %>
+  import SettingsPage from '@/components/Settings';
+  <% } %>
+  <% if (props.stylingPackage?.options?.pagePresets?.includes('profile')) { %>
+  import ProfilePage from '@/components/Profile';
+  <% } %>
+  <% if (props.stylingPackage?.options?.pagePresets?.includes('login')) { %>
+  import LoginPage from '@/components/Login';
+  <% } %>
+  <% if (props.stylingPackage?.options?.pagePresets?.includes('signup')) { %>
+  import SignupPage from '@/components/Signup';
+  <% } %>
 
   const Stack = createStackNavigator({
     screens: {
@@ -88,6 +188,38 @@
           headerLeft: () => null,
         },
       },
+      <% if (props.stylingPackage?.options?.pagePresets?.includes('settings')) { %>
+      Settings: {
+        screen: SettingsPage,
+        options: {
+          title: 'Settings',
+        },
+      },
+      <% } %>
+      <% if (props.stylingPackage?.options?.pagePresets?.includes('profile')) { %>
+      Profile: {
+        screen: ProfilePage,
+        options: {
+          title: 'Profile',
+        },
+      },
+      <% } %>
+      <% if (props.stylingPackage?.options?.pagePresets?.includes('login')) { %>
+      Login: {
+        screen: LoginPage,
+        options: {
+          title: 'Login',
+        },
+      },
+      <% } %>
+      <% if (props.stylingPackage?.options?.pagePresets?.includes('signup')) { %>
+      Signup: {
+        screen: SignupPage,
+        options: {
+          title: 'Signup',
+        },
+      },
+      <% } %>
     },
   });
 

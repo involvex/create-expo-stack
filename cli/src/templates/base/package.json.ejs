@@ -24,7 +24,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "start": "expo start",
-	<% } %>
+  <% } %>
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
     "web": "expo start --web"
@@ -32,7 +32,6 @@
   "dependencies": {
     <% if (props.stylingPackage?.name === "nativewind" || props.stylingPackage?.name === "nativewindui") { %>
       "nativewind": "latest",
-      "react-native-text": "latest",
     <% } %>
     <% if (props.stylingPackage?.name === "nativewindui") { %>
       "@shopify/flash-list": "2.0.2",
@@ -115,14 +114,18 @@
       "react-native-web": "~0.21.0",
     <% } %>
 
-	<% if (props.authenticationPackage?.name === "supabase") { %>
-	    "@react-native-async-storage/async-storage": "1.21.0",
-		"@supabase/supabase-js": "^2.38.4",
-	<% } %>
+    <% if ((props.stylingPackage?.options?.pagePresets?.includes('settings') || props.stylingPackage?.options?.pagePresets?.includes('profile')) && props.navigationPackage?.name !== "expo-router" && props.navigationPackage?.name !== "react-navigation") { %>
+      "@expo/vector-icons": "^15.0.2",
+    <% } %>
 
-	<% if (props.authenticationPackage?.name === "firebase") { %>
-	  "firebase": "^10.5.2",
-	<% } %>
+    <% if (props.authenticationPackage?.name === "supabase") { %>
+      "@react-native-async-storage/async-storage": "1.21.0",
+      "@supabase/supabase-js": "^2.38.4",
+    <% } %>
+
+    <% if (props.authenticationPackage?.name === "firebase") { %>
+      "firebase": "^10.5.2",
+    <% } %>
 
   <% if (props.internalizationPackage?.name === "i18next") { %>
     "i18next": "^23.7.20",
@@ -147,7 +150,7 @@
     "@babel/core": "^7.20.0",
     "@types/react": "~19.2.0",
     "eslint": "^9.25.1",
-    "eslint-config-expo": "~11.0.0",
+    "eslint-config-expo": "~55.0.0",
     "eslint-config-prettier": "^10.1.2",
     "prettier": "^3.2.5",
     <% if (props.stylingPackage?.name === "nativewind" || props.stylingPackage?.name === "nativewindui") { %>

@@ -13,7 +13,7 @@ export const defaultOptions: CliResults = {
     noGit: false,
     noInstall: false,
     overwrite: false,
-    importAlias: '~/',
+    importAlias: true,
     packageManager: undefined,
     eas: false,
     publish: false

@@ -1,13 +1,13 @@
 <% if (props.stylingPackage?.name === "nativewind") { %>
-  import '../global.css';
-  import { SafeAreaProvider } from 'react-native-safe-area-context';
-<% } else if (props.stylingPackage?.name === "nativewinui") { %>
-  import '../global.css';
-  import 'expo-dev-client';
+import '../global.css';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+<% } else if (props.stylingPackage?.name === "nativewindui") { %>
+import '../global.css';
+import 'expo-dev-client';
 <% } %>
 
 <% if (props.internalizationPackage?.name === "i18next") { %>
-  import '../translation';
+import '../translation';
 <% } %>
 
 import 'react-native-gesture-handler';
@@ -15,58 +15,70 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Stack } from 'expo-router';
 
 <% if (props.stylingPackage?.name === "unistyles") { %>
-  import { useUnistyles } from "react-native-unistyles";
+import { useUnistyles } from 'react-native-unistyles';
 <% } %>
 
 <% if (props.analyticsPackage?.name === "vexo-analytics") { %>
-  import { vexo } from 'vexo-analytics';
+import { vexo } from 'vexo-analytics';
 
-  vexo(process.env.EXPO_PUBLIC_VEXO_API_KEY);
+vexo(process.env.EXPO_PUBLIC_VEXO_API_KEY);
 <% } %>
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "(drawer)",
+  initialRouteName: '(drawer)',
 };
 
 export default function RootLayout() {
-  <% if (props.stylingPackage?.name === "unistyles") { %>
-    const { theme } = useUnistyles();
-  <% } %>
+<% if (props.stylingPackage?.name === "unistyles") { %>
+  const { theme } = useUnistyles();
+<% } %>
 
   return (
-        <GestureHandlerRootView style={{ flex: 1 }}>
-        <% if (props.stylingPackage?.name === "nativewind") { %>
-          <SafeAreaProvider>
-        <% } %>
-         <% if (props.stylingPackage?.name === "unistyles") { %>
-            <Stack
-                screenOptions={{
-                    headerStyle: {
-                        backgroundColor: theme.colors.background,
-                    },
-                    headerTitleStyle: {
-                        color: theme.colors.typography,
-                    },
-                    headerTintColor: theme.colors.typography,
-                    drawerStyle: {
-                        backgroundColor: theme.colors.background,
-                    },
-                    drawerLabelStyle: {
-                        color: theme.colors.typography,
-                    },
-                    drawerInactiveTintColor: theme.colors.typography,
-                }}
-            >
-        <% } else  { %>
-          <Stack>
-        <% } %>
-            <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ title: 'Modal', presentation: 'modal' }} />
-          </Stack>
-        <% if (props.stylingPackage?.name === "nativewind") { %>
-          </SafeAreaProvider>
-        <% } %>
-        </GestureHandlerRootView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+<% if (props.stylingPackage?.name === "nativewind") { %>
+      <SafeAreaProvider>
+<% } %>
+<% if (props.stylingPackage?.name === "unistyles") { %>
+        <Stack
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: theme.colors.background,
+            },
+            headerTitleStyle: {
+              color: theme.colors.typography,
+            },
+            headerTintColor: theme.colors.typography,
+            drawerStyle: {
+              backgroundColor: theme.colors.background,
+            },
+            drawerLabelStyle: {
+              color: theme.colors.typography,
+            },
+            drawerInactiveTintColor: theme.colors.typography,
+          }}
+        >
+<% } else  { %>
+        <Stack>
+<% } %>
+          <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ title: 'Modal', presentation: 'modal' }} />
+          <% if (props.stylingPackage?.options?.pagePresets?.includes('settings')) { %>
+          <Stack.Screen name="settings" options={{ title: 'Settings' }} />
+          <% } %>
+          <% if (props.stylingPackage?.options?.pagePresets?.includes('profile')) { %>
+          <Stack.Screen name="profile" options={{ title: 'Profile' }} />
+          <% } %>
+          <% if (props.stylingPackage?.options?.pagePresets?.includes('login')) { %>
+          <Stack.Screen name="login" options={{ title: 'Login' }} />
+          <% } %>
+          <% if (props.stylingPackage?.options?.pagePresets?.includes('signup')) { %>
+          <Stack.Screen name="signup" options={{ title: 'Signup' }} />
+          <% } %>
+        </Stack>
+<% if (props.stylingPackage?.name === "nativewind") { %>
+      </SafeAreaProvider>
+<% } %>
+    </GestureHandlerRootView>
   );
 }

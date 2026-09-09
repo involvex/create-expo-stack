@@ -1,18 +1,18 @@
 <% if (props.stylingPackage?.name === "unistyles") { %>
 import './unistyles';
 <% } %>
-import { ScreenContent } from 'components/ScreenContent';
+import { ScreenContent } from '@/components/ScreenContent';
 import { StatusBar } from 'expo-status-bar';
 
 <% if (props.internalizationPackage?.name === "i18next") { %>
   import './translation';
-  import { InternalizationExample } from 'components/InternalizationExample';
+  import { InternalizationExample } from '@/components/InternalizationExample';
 <% } %>
 
 <% if (props.stylingPackage?.name === "nativewind") { %>
   import './global.css';
   import { SafeAreaProvider } from 'react-native-safe-area-context';
-<% } else if (props.stylingPackage?.name === "nativewinui") { %>
+<% } else if (props.stylingPackage?.name === "nativewindui") { %>
   import './global.css';
   import 'expo-dev-client';
 <% } %>

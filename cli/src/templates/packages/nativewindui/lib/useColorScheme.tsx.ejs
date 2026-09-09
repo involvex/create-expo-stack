@@ -1,4 +1,7 @@
+import * as SystemUI from 'expo-system-ui';
 import { useColorScheme as useNativewindColorScheme } from 'nativewind';
+import * as React from 'react';
+import { Platform } from 'react-native';
 
 import { COLORS } from '@/theme/colors';
 
@@ -18,4 +21,12 @@ function useColorScheme() {
   };
 }
 
-export { useColorScheme };
+function useInitialAndroidBarSync() {
+  const { colorScheme } = useNativewindColorScheme();
+  React.useEffect(() => {
+    if (Platform.OS !== 'android') return;
+    SystemUI.setBackgroundColorAsync(COLORS[colorScheme ?? 'light'].root);
+  }, [colorScheme]);
+}
+
+export { useColorScheme, useInitialAndroidBarSync };

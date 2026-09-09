@@ -62,6 +62,8 @@ export function generateProjectFiles(
       }
     }
 
+    target = target.replace('packages/presets/', '');
+
     if (internalizationPackage?.name === 'i18next') {
       target = target.replace('packages/i18next/', '');
     }

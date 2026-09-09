@@ -138,6 +138,13 @@ export function configureProjectFiles(
       if (stylingPackage.options.pagePresets.includes('signup')) {
         nativewindUIFiles.push('packages/nativewind/components/Signup.tsx.ejs');
       }
+
+      // Add route files so the selected presets are real, navigable routes
+      if (navigationPackage?.name === 'expo-router') {
+        for (const preset of stylingPackage.options.pagePresets) {
+          nativewindUIFiles.push(`packages/presets/app/${preset}.tsx.ejs`);
+        }
+      }
     }
 
     files = nativewindUIFiles;
@@ -312,6 +319,13 @@ export function configureProjectFiles(
         expoRouterFiles.push('base/components/HeaderButton.tsx.ejs');
       }
 
+      // Add route files for selected page presets so they are real, navigable routes
+      if (stylingPackage?.options?.pagePresets) {
+        for (const preset of stylingPackage.options.pagePresets) {
+          expoRouterFiles.push(`packages/presets/app/${preset}.tsx.ejs`);
+        }
+      }
+
       // Remove the base App.tsx.ejs file since we'll be using index.tsx from expo-router
       files = files.filter((file) => file !== 'base/App.tsx.ejs');
 
@@ -319,19 +333,24 @@ export function configureProjectFiles(
     }
 
     // add supabase files if needed
+    // (skip the .env file when vexo is selected: the vexo .env template already includes the auth keys)
     if (authenticationPackage?.name === 'supabase') {
-      const supabaseFiles = ['packages/supabase/utils/supabase.ts.ejs', 'packages/supabase/.env.ejs'];
+      const supabaseFiles = ['packages/supabase/utils/supabase.ts.ejs'];
+
+      if (analyticsPackage?.name !== 'vexo-analytics') {
+        supabaseFiles.push('packages/supabase/.env.ejs');
+      }
 
       files = [...files, ...supabaseFiles];
     }
 
-    // add supabase files if needed
+    // add firebase files if needed
     if (authenticationPackage?.name === 'firebase') {
-      const firebaseFiles = [
-        'packages/firebase/utils/firebase.ts.ejs',
-        'packages/firebase/metro.config.js.ejs',
-        'packages/firebase/.env.ejs'
-      ];
+      const firebaseFiles = ['packages/firebase/utils/firebase.ts.ejs', 'packages/firebase/metro.config.js.ejs'];
+
+      if (analyticsPackage?.name !== 'vexo-analytics') {
+        firebaseFiles.push('packages/firebase/.env.ejs');
+      }
 
       files = [...files, ...firebaseFiles];
     }

@@ -18,8 +18,8 @@ export async function generateNWUI(cliResults: CliResults, toolbox: GluegunToolb
   s.start('Adding nativewindui components...');
 
   const flags = cliResults.flags.noInstall
-    ? '--yes --no-install --quiet -d ${cliResults.projectName}'
-    : '--yes --quiet -d ${cliResults.projectName}';
+    ? `--yes --no-install --quiet -d ${cliResults.projectName}`
+    : `--yes --quiet -d ${cliResults.projectName}`;
 
   // --yes accepts installing packages without prompting
   const runCommand = runnerType === 'npx' ? `${runnerType} --yes` : runnerType;

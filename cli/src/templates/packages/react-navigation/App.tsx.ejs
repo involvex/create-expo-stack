@@ -1,9 +1,9 @@
 <% if (props.stylingPackage?.name === "nativewind") { %>
-  import './global.css';
-  import { SafeAreaProvider } from 'react-native-safe-area-context';
-<% } else if (props.stylingPackage?.name === "nativewinui") { %>
-  import './global.css';
-  import 'expo-dev-client';
+import './global.css';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+<% } else if (props.stylingPackage?.name === "nativewindui") { %>
+import './global.css';
+import 'expo-dev-client';
 <% } %>
 <% if (props.stylingPackage?.name === "unistyles") { %>
 import './unistyles';
@@ -16,55 +16,55 @@ import { useColorScheme } from 'react-native';
 import { useMemo } from 'react';
 <% } %>
 <% if (props.internalizationPackage?.name === "i18next") { %>
-  import './translation';
+import './translation';
 <% } %>
-import "react-native-gesture-handler";
+import 'react-native-gesture-handler';
 
 <% if (props.analyticsPackage?.name === "vexo-analytics") { %>
-  import { vexo } from 'vexo-analytics';
+import { vexo } from 'vexo-analytics';
 
-  vexo(process.env.VEXO_API_KEY); // eslint-disable-line
+vexo(process.env.EXPO_PUBLIC_VEXO_API_KEY); // eslint-disable-line
 
-  import Navigation from "./navigation"; // eslint-disable-line
+import Navigation from './navigation'; // eslint-disable-line
 <% } else { %>
-  import Navigation from "./navigation";
+import Navigation from './navigation';
 <% } %>
 
 export default function App() {
-	<% if (props.stylingPackage?.name === "unistyles")  { %> 
-    const { theme, rt } = useUnistyles();
+<% if (props.stylingPackage?.name === "unistyles")  { %>
+  const { theme, rt } = useUnistyles();
 
-    const baseTheme = rt.colorScheme === 'dark' ? DarkTheme : DefaultTheme;
-    const mergedTheme = useMemo(() => ({
-      ...baseTheme,
-      colors: {
-        ...baseTheme.colors,
-        background: theme.colors.background,
-        text: theme.colors.typography,
-        primary: theme.colors.astral,
-        secondary: theme.colors.cornflowerBlue,
-        border: theme.colors.limedSpruce,
-        card: theme.colors.background,
-        notification: theme.colors.astral,
-      },
-    }), [baseTheme, theme.colors.background, theme.colors.typography, theme.colors.astral, theme.colors.cornflowerBlue, theme.colors.limedSpruce]);
+  const baseTheme = rt.colorScheme === 'dark' ? DarkTheme : DefaultTheme;
+  const mergedTheme = useMemo(() => ({
+    ...baseTheme,
+    colors: {
+      ...baseTheme.colors,
+      background: theme.colors.background,
+      text: theme.colors.typography,
+      primary: theme.colors.astral,
+      secondary: theme.colors.cornflowerBlue,
+      border: theme.colors.limedSpruce,
+      card: theme.colors.background,
+      notification: theme.colors.astral,
+    },
+  }), [baseTheme, theme.colors.background, theme.colors.typography, theme.colors.astral, theme.colors.cornflowerBlue, theme.colors.limedSpruce]);
 
-    return <Navigation theme={mergedTheme} />;
-	<% } else if (props.stylingPackage?.name === "nativewind") { %> 
-		const colorScheme = useColorScheme();
-		const theme = useMemo(() => colorScheme === 'dark' ? DarkTheme : DefaultTheme, [colorScheme]);
+  return <Navigation theme={mergedTheme} />;
+<% } else if (props.stylingPackage?.name === "nativewind") { %>
+  const colorScheme = useColorScheme();
+  const theme = useMemo(() => colorScheme === 'dark' ? DarkTheme : DefaultTheme, [colorScheme]);
 
-		return (
-			<SafeAreaProvider>
-				<Navigation theme={theme} />
-			</SafeAreaProvider>
-		);
-	<% } else if (props.stylingPackage?.name === "stylesheet") { %> 
-		const colorScheme = useColorScheme();
-		const theme = useMemo(() => colorScheme === 'dark' ? DarkTheme : DefaultTheme, [colorScheme]);
+  return (
+    <SafeAreaProvider>
+      <Navigation theme={theme} />
+    </SafeAreaProvider>
+  );
+<% } else if (props.stylingPackage?.name === "stylesheet") { %>
+  const colorScheme = useColorScheme();
+  const theme = useMemo(() => colorScheme === 'dark' ? DarkTheme : DefaultTheme, [colorScheme]);
 
-		return <Navigation theme={theme} />;
-	<% } else { %> 
-		return <Navigation />;
-	<% } %>
+  return <Navigation theme={theme} />;
+<% } else { %>
+  return <Navigation />;
+<% } %>
 }
