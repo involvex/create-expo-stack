@@ -23,7 +23,9 @@ export function configureProjectFiles(
   toolbox: Toolbox,
   cliResults: CliResults,
   internalizationPackage: AvailablePackages | undefined,
-  stateManagementPackage: AvailablePackages | undefined
+  stateManagementPackage: AvailablePackages | undefined,
+  sentryPackage: AvailablePackages | undefined,
+  testingPackage: AvailablePackages | undefined
 ): string[] {
   // Define the files common to all templates to be generated
   let baseFiles = [
@@ -394,6 +396,29 @@ export function configureProjectFiles(
   if (stateManagementPackage?.name === 'jotai') {
     const jotaiFiles = ['packages/jotai/store/atoms.ts.ejs'];
     files = [...files, ...jotaiFiles];
+  }
+
+  // add sentry files if needed (works with all styling packages)
+  if (sentryPackage?.name === 'sentry') {
+    const sentryFiles = ['packages/sentry/utils/sentry.ts.ejs'];
+    files = [...files, ...sentryFiles];
+
+    // add sentry .env.ejs only if no other .env.ejs is already included
+    const hasEnvFile = files.some((f) => f.endsWith('.env.ejs'));
+    if (!hasEnvFile) {
+      files.push('packages/sentry/.env.ejs');
+    }
+  }
+
+  // add testing files if needed
+  if (testingPackage?.name === 'testing') {
+    const testingFiles = [
+      'packages/testing/vitest.config.ts.ejs',
+      'packages/testing/testSetup.ts.ejs',
+      'packages/testing/__tests__/example.test.tsx.ejs',
+      'packages/github-actions/ci.yml.ejs'
+    ];
+    files = [...files, ...testingFiles];
   }
 
   // Add npmrc file if user is using pnpm

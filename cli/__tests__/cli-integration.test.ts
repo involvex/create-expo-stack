@@ -97,11 +97,25 @@ const nativewinduiCombinations = [
   ['--nativewindui', '--blank', '--no-install']
 ] as const;
 
+const sentryCombinations = [
+  ['--sentry', '--stylesheet', '--expo-router', '--no-install'],
+  ['--sentry', '--nativewind', '--expo-router', '--no-install'],
+  ['--sentry', '--nativewindui', '--no-install']
+] as const;
+
+const testingCombinations = [
+  ['--testing', '--stylesheet', '--expo-router', '--no-install'],
+  ['--testing', '--nativewind', '--expo-router', '--no-install'],
+  ['--testing', '--nativewindui', '--no-install']
+] as const;
+
 const popularCombinations = [
   ...styleSheetCombinations,
   ...nativewindCombinations,
   ...nativewinduiCombinations,
-  ...reactNavigationCombinations
+  ...reactNavigationCombinations,
+  ...sentryCombinations,
+  ...testingCombinations
 ];
 
 const projectName = `myTestProject`;

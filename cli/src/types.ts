@@ -29,7 +29,9 @@ export const availablePackages = [
   'zustand',
   'jotai',
   'vexo-analytics',
-  'posthog'
+  'posthog',
+  'sentry',
+  'testing'
 ] as const;
 
 export type AuthenticationSelect = 'supabase' | 'firebase' | undefined;
@@ -47,6 +49,10 @@ export type StateManagementSelect = 'zustand' | 'jotai' | undefined;
 export type Internalization = 'i18next';
 
 export type Analytics = 'vexo-analytics' | 'posthog';
+
+export type ErrorTracking = 'sentry';
+
+export type Testing = 'testing';
 
 export type PagePreset = 'settings' | 'profile' | 'login' | 'signup';
 
@@ -66,7 +72,15 @@ export type SelectedComponents =
 
 export type AvailablePackages = {
   name: (typeof availablePackages)[number];
-  type: 'navigation' | 'styling' | 'authentication' | 'internationalization' | 'state-management' | 'analytics';
+  type:
+    | 'navigation'
+    | 'styling'
+    | 'authentication'
+    | 'internationalization'
+    | 'state-management'
+    | 'analytics'
+    | 'error-tracking'
+    | 'testing';
   options?: { selectedComponents?: SelectedComponents[]; type?: NavigationTypes; pagePresets?: PagePreset[] };
 };
 

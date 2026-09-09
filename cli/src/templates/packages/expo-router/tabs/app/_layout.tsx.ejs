@@ -18,6 +18,10 @@ import { vexo } from 'vexo-analytics';
 vexo(process.env.EXPO_PUBLIC_VEXO_API_KEY);
 <% } %>
 
+<% if (props.sentryPackage?.name === "sentry") { %>
+import '@/utils/sentry';
+<% } %>
+
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: '(tabs)',

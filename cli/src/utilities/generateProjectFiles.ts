@@ -12,7 +12,9 @@ export function generateProjectFiles(
   stylingPackage: AvailablePackages | undefined,
   toolbox: Toolbox,
   internalizationPackage: AvailablePackages | undefined,
-  stateManagementPackage: AvailablePackages | undefined
+  stateManagementPackage: AvailablePackages | undefined,
+  sentryPackage: AvailablePackages | undefined,
+  testingPackage: AvailablePackages | undefined
 ) {
   const { projectName, packages, flags } = cliResults;
 
@@ -80,6 +82,15 @@ export function generateProjectFiles(
       target = target.replace('packages/posthog/', '');
     }
 
+    if (sentryPackage?.name === 'sentry') {
+      target = target.replace('packages/sentry/', '');
+    }
+
+    if (cliResults.packages.some((pkg) => pkg.name === 'testing')) {
+      target = target.replace('packages/testing/', '');
+      target = target.replace('packages/github-actions/', '.github/workflows/');
+    }
+
     const gen = toolbox.template.generate({
       template,
       target: `./${projectName}/` + target,
@@ -93,7 +104,9 @@ export function generateProjectFiles(
         packages,
         stylingPackage,
         internalizationPackage,
-        stateManagementPackage
+        stateManagementPackage,
+        sentryPackage,
+        testingPackage
       }
     });
 

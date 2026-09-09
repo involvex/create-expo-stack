@@ -340,6 +340,16 @@ const command: GluegunCommand = {
           cliResults.packages.push({ name: 'posthog', type: 'analytics' });
         }
 
+        // Error tracking packages
+        if (options.sentry) {
+          cliResults.packages.push({ name: 'sentry', type: 'error-tracking' });
+        }
+
+        // Testing packages
+        if (options.testing) {
+          cliResults.packages.push({ name: 'testing', type: 'testing' });
+        }
+
         // By this point, all cliResults should be set
         info('');
         highlight('Your project configuration:');
@@ -445,6 +455,8 @@ const command: GluegunCommand = {
         const stylingPackage = packages.find((p) => p.type === 'styling');
         const internalizationPackage = packages.find((p) => p.type === 'internationalization');
         const analyticsPackage = packages.find((p) => p.type === 'analytics');
+        const sentryPackage = packages.find((p) => p.type === 'error-tracking') || undefined;
+        const testingPackage = packages.find((p) => p.type === 'testing') || undefined;
 
         //add the state management package if it is selected
         const stateManagementPackage = packages.find((p) => p.type === 'state-management') || undefined;
@@ -460,7 +472,9 @@ const command: GluegunCommand = {
           toolbox,
           cliResults,
           internalizationPackage,
-          stateManagementPackage
+          stateManagementPackage,
+          sentryPackage,
+          testingPackage
         );
 
         // Once all the files are defined, format and generate them
@@ -477,7 +491,9 @@ const command: GluegunCommand = {
           stylingPackage,
           toolbox,
           internalizationPackage,
-          stateManagementPackage
+          stateManagementPackage,
+          sentryPackage,
+          testingPackage
         );
 
         await printOutput(cliResults, formattedFiles, toolbox, stylingPackage);

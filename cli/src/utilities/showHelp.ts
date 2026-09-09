@@ -64,6 +64,12 @@ export function showHelp(info, highlight, warning) {
   info('    	--zustand         Use Zustand for state management');
   info('    	--jotai           Use Jotai for state management');
   info('');
+  highlight('   Error Tracking');
+  info('    	--sentry          Use Sentry for error tracking');
+  info('');
+  highlight('   Testing');
+  info('    	--testing         Add Vitest testing setup + GitHub Actions CI');
+  info('');
   highlight('   Opinionated Stacks');
   info('    -i, --ignite          Use Ignite to create an opinionated stack');
   info('');

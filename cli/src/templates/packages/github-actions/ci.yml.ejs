@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'bun'
+      - uses: oven/setup-bun@v1
+        with:
+          version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run lint
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'bun'
+      - uses: oven/setup-bun@v1
+        with:
+          version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run tsc --noEmit
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'bun'
+      - uses: oven/setup-bun@v1
+        with:
+          version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run test
+
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'bun'
+      - uses: oven/setup-bun@v1
+        with:
+          version: latest
+      - uses: android-actions/setup-android@v3
+        with:
+          api-level: 33
+          ndk: 25.2.3
+          cmake: 3.22.1
+          abi-types: armeabi-v7a,arm64-v8a,x86_64
+      - run: bun install --frozen-lockfile
+      - run: bun run build:dev
+
+  ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'bun'
+      - uses: oven/setup-bun@v1
+        with:
+          version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run build:dev
+
+  ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'bun'
+      - uses: 11n7r42gh/setup-bun@dbb30f27d901e8d317520f78d0b2f4e8e4f4e4e4
+        with:
+          version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run build:dev

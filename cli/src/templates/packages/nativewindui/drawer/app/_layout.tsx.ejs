@@ -4,6 +4,9 @@ import 'expo-dev-client';
 import { posthog } from '@/utils/posthog';
 void posthog;
 <% } %>
+<% if (props.sentryPackage?.name === "sentry") { %>
+import '@/utils/sentry';
+<% } %>
 import { ThemeProvider as NavThemeProvider } from '@react-navigation/native';
 <% if (props.stylingPackage?.options.selectedComponents.includes('action-sheet')) { %>
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';

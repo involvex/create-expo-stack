@@ -17,6 +17,10 @@ import { vexo } from 'vexo-analytics';
 vexo(process.env.EXPO_PUBLIC_VEXO_API_KEY);
 <% } %>
 
+<% if (props.sentryPackage?.name === "sentry") { %>
+import '@/utils/sentry';
+<% } %>
+
 export default function Layout() {
 <% if (props.stylingPackage?.name === "unistyles") { %>
   const { theme } = useUnistyles();

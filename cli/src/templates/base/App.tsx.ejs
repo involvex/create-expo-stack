@@ -28,6 +28,10 @@ import { StatusBar } from 'expo-status-bar';
   void posthog;
 <% } %>
 
+<% if (props.sentryPackage?.name === "sentry") { %>
+  import '@/utils/sentry';
+<% } %>
+
 export default function App() {
   return (
     <% if (props.stylingPackage?.name === "nativewind") { %>

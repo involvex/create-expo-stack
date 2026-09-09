@@ -189,7 +189,32 @@ export async function printOutput(
     info(``);
   };
 
-  //	check if packages includes package with name "supabase"
+  const printSentrySteps = () => {
+    info(``);
+    highlight('Head over to https://sentry.io to create a new Sentry project.');
+    info(``);
+    highlight(`Get the DSN:`);
+    info(`1. Create a new project in your Sentry dashboard.`);
+    highlight(`https://sentry.io/welcome/`);
+    info(`2. Find your DSN in the project settings.`);
+    info(`3. Copy the DSN and paste it into your .env file as EXPO_PUBLIC_SENTRY_DSN.`);
+    info(`4. Optionally, follow the docs to get started with Sentry:`);
+    highlight(`https://docs.sentry.io/platforms/react-native/`);
+    info(``);
+  };
+
+  const printTestingSteps = () => {
+    info(``);
+    highlight(`Testing is set up with Vitest!`);
+    info(`Run tests with:`);
+    highlight(`  bun run test        # run all tests`);
+    highlight(`  bun run test:watch  # run in watch mode`);
+    highlight(`  bun run test:coverage  # run with coverage`);
+    info(`Learn more at: https://vitest.dev/`);
+    info(``);
+  };
+
+  //check if packages includes package with name "supabase"
   if (cliResults.packages.some((pkg) => pkg.name === 'supabase')) {
     success(`\nSuccess! 🎉 Now, here's what's next:`);
     info(``);
@@ -206,6 +231,9 @@ export async function printOutput(
     }
     if (cliResults.packages.some((pkg) => pkg.name === 'posthog')) {
       printPostHogSteps();
+    }
+    if (cliResults.packages.some((pkg) => pkg.name === 'sentry')) {
+      printSentrySteps();
     }
     success(`Once you're done, run the following to get started: `);
     info(``);
@@ -227,19 +255,35 @@ export async function printOutput(
     if (cliResults.packages.some((pkg) => pkg.name === 'posthog')) {
       printPostHogSteps();
     }
+    if (cliResults.packages.some((pkg) => pkg.name === 'sentry')) {
+      printSentrySteps();
+    }
     success(`Once you're done, run the following to get started: `);
     info(``);
   } else {
     if (cliResults.packages.some((pkg) => pkg.name === 'vexo-analytics')) {
       success(`Success! 🎉 Now, here's what's next:`);
       printVexoSteps();
+      if (cliResults.packages.some((pkg) => pkg.name === 'sentry')) {
+        printSentrySteps();
+      }
       success(`Once you're done, run the following to get started: `);
     } else if (cliResults.packages.some((pkg) => pkg.name === 'posthog')) {
       success(`Success! 🎉 Now, here's what's next:`);
       printPostHogSteps();
+      if (cliResults.packages.some((pkg) => pkg.name === 'sentry')) {
+        printSentrySteps();
+      }
+      success(`Once you're done, run the following to get started: `);
+    } else if (cliResults.packages.some((pkg) => pkg.name === 'sentry')) {
+      success(`Success! 🎉 Now, here's what's next:`);
+      printSentrySteps();
       success(`Once you're done, run the following to get started: `);
     } else {
       success('\nSuccess! 🎉 Now, just run the following to get started: ');
+    }
+    if (cliResults.packages.some((pkg) => pkg.name === 'testing')) {
+      printTestingSteps();
     }
     info(``);
   }

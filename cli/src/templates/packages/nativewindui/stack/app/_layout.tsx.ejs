@@ -4,6 +4,9 @@ import '@/global.css';
 import { posthog } from '@/utils/posthog';
 void posthog;
 <% } %>
+<% if (props.sentryPackage?.name === "sentry") { %>
+import '@/utils/sentry';
+<% } %>
 <% if (props.stylingPackage?.options.selectedComponents.includes('action-sheet')) { %>
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 <% } %>

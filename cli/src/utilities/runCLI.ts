@@ -12,6 +12,7 @@ import {
   PackageManager,
   PagePreset,
   Analytics,
+  ErrorTracking,
   SelectedComponents,
   StylingSelect
 } from '../types';
@@ -423,6 +424,26 @@ export async function runCLI(toolbox: Toolbox, projectName: string): Promise<Cli
     success(`No problem, skipping analytics for now.`);
   }
 
+  const errorTrackingSelect = await select({
+    message: 'What would you like to use for error tracking?',
+    options: [
+      { value: undefined, label: 'None' },
+      { value: 'sentry', label: 'Sentry' }
+    ]
+  });
+
+  if (isCancel(errorTrackingSelect)) {
+    cancel('Cancelled... 👋');
+    return process.exit(0);
+  }
+
+  if (errorTrackingSelect) {
+    cliResults.packages.push({ name: errorTrackingSelect as ErrorTracking, type: 'error-tracking' });
+    success(`You'll be using Sentry for error tracking.`);
+  } else {
+    success(`No problem, skipping error tracking for now.`);
+  }
+
   const easEnabled = await confirm({
     message: `Do you want to setup EAS`,
     initialValue: false
@@ -438,6 +459,27 @@ export async function runCLI(toolbox: Toolbox, projectName: string): Promise<Cli
     success(`We'll setup EAS for you.`);
   } else {
     success(`No problem, skipping eas for now.`);
+  }
+
+  // Offer user ability to add testing setup
+  const testingSelect = await select({
+    message: 'Would you like to set up testing with Vitest?',
+    options: [
+      { value: undefined, label: 'No, skip testing' },
+      { value: 'testing', label: 'Yes, add Vitest testing + CI/CD' }
+    ]
+  });
+
+  if (isCancel(testingSelect)) {
+    cancel('Cancelled... 👋');
+    return process.exit(0);
+  }
+
+  if (testingSelect) {
+    cliResults.packages.push({ name: 'testing', type: 'testing' });
+    success('Testing with Vitest is set up, including GitHub Actions CI/CD!');
+  } else {
+    success('No problem, skipping testing setup.');
   }
 
   // Offer user ability to save configuration
