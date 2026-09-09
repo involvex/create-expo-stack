@@ -1,5 +1,5 @@
 {
-  "pipeline": {
+  "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".vercel/**", "dist/**"],
@@ -11,12 +11,12 @@
     },
     "//#format": {
       "outputs": ["node_modules/.cache/prettiercache"],
-      "outputMode": "errors-only"
+      "outputLogs": "errors-only"
     },
     "format": {
       "dependsOn": ["^topo"],
       "outputs": ["node_modules/.cache/prettiercache"],
-      "outputMode": "errors-only"
+      "outputLogs": "errors-only"
     },
     "clean": {
       "cache": false
