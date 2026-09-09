@@ -6,7 +6,7 @@ export function generateProjectFiles(
   analyticsPackage: AvailablePackages | undefined,
   cliResults: CliResults,
   files: string[],
-  formattedFiles: any[],
+  formattedFiles: Promise<string>[],
   navigationPackage: AvailablePackages | undefined,
   packageManager: PackageManager,
   stylingPackage: AvailablePackages | undefined,

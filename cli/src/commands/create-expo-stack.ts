@@ -1,5 +1,5 @@
 import { GluegunCommand } from 'gluegun';
-const util = require('util');
+import util from 'util';
 
 import {
   configureProjectFiles,
@@ -151,7 +151,7 @@ const command: GluegunCommand = {
         cliResults.projectName,
         cliResults.flags.overwrite
       );
-    } catch (err: string | any) {
+    } catch (err) {
       if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development') {
         error(`error: ${err}`);
       }
@@ -453,7 +453,7 @@ const command: GluegunCommand = {
         );
 
         // Once all the files are defined, format and generate them
-        let formattedFiles: any[] = [];
+        let formattedFiles: Promise<string>[] = [];
 
         formattedFiles = generateProjectFiles(
           authenticationPackage,

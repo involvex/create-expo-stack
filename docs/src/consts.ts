@@ -34,10 +34,7 @@ export const ALGOLIA = {
 };
 
 export type OuterHeaders =
-  | "Create Expo Stack"
-  | "Getting Started"
-  | "Deployment"
-  | "Usage";
+  "Create Expo Stack" | "Getting Started" | "Deployment" | "Usage";
 
 export interface SidebarItem<
   TCode extends KnownLanguageCode = KnownLanguageCode,

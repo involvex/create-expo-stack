@@ -12,6 +12,7 @@
 .prettierignore
 bun.lock
 bun.lockb
+tsconfig.tsbuildinfo
 LICENSE
 **/.vscode/*.json
 cli/__tests__/__snapshots__/*

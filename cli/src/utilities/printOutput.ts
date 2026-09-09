@@ -1,3 +1,4 @@
+import pkg from '../../package.json';
 import { outro, spinner } from '@clack/prompts';
 import { Toolbox } from 'gluegun/build/types/domain/toolbox';
 import os from 'os';
@@ -16,7 +17,7 @@ nodeLinker: node-modules`;
 
 export async function printOutput(
   cliResults: CliResults,
-  formattedFiles: any[],
+  formattedFiles: Promise<string>[],
   toolbox: Toolbox,
   stylingPackage: AvailablePackages
 ): Promise<void> {
@@ -122,7 +123,7 @@ export async function printOutput(
     s.start(`Initializing git...`);
     // initialize git repo and add first commit
     // get create expo stack version
-    const cesVersion: string = require('../../package.json').version || '2.0.0';
+    const cesVersion: string = pkg.version || '2.0.0';
 
     await runSystemCommand({
       toolbox,
@@ -155,7 +156,7 @@ export async function printOutput(
           '\nUnistyles is currently not compatible with xcode 16.2 due to an xcode bug, downgrade to 16.1 or lower to use Unistyles \nhttps://github.com/jpudysz/react-native-unistyles/issues/507'
         );
       }
-    } catch (_e: unknown) {
+    } catch {
       // ignore this error
     }
   }
@@ -226,7 +227,7 @@ export async function printOutput(
     highlight(`${step}. cd ${projectName}`);
     if (!flags.noInstall) highlight(`${++step}. ${packageManager} install`);
     highlight(`${++step}. eas build --profile=development`);
-    highlight(`${++step}. ${runCommand} start`);
+    highlight(`${step + 1}. ${runCommand} start`);
 
     info(``);
 
@@ -236,7 +237,7 @@ export async function printOutput(
     info(``);
     highlight(`${step}. cd ${projectName}`);
     if (!flags.noInstall) highlight(`${++step}. ${packageManager} install`);
-    highlight(`${++step}. eas build --profile=preview`);
+    highlight(`${step + 1}. eas build --profile=preview`);
 
     info(``);
 
@@ -249,7 +250,7 @@ export async function printOutput(
     if (stylingPackage.name === 'unistyles' || stylingPackage.name === 'nativewindui') {
       highlight(`${++step}. npx expo prebuild --clean`);
     }
-    highlight(`${++step}. ${runCommand} ios`);
+    highlight(`${step + 1}. ${runCommand} ios`);
   }
   info(``);
 

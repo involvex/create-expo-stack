@@ -17,7 +17,7 @@ export async function run() {
     .create();
 
   // Node version check
-  const [major, minor, _patch] = process.versions.node.split('.').map(Number);
+  const [major, minor] = process.versions.node.split('.').map(Number);
   const isVersionOk = major > 20 || (major === 20 && minor >= 19);
 
   if (!isVersionOk) {

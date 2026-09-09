@@ -1,4 +1,5 @@
-﻿import { Toolbox } from 'gluegun/build/types/domain/toolbox';
+﻿import pkg from '../../package.json';
+import { Toolbox } from 'gluegun/build/types/domain/toolbox';
 import os from 'os';
 import {
   Analytics,
@@ -365,7 +366,7 @@ export function configureProjectFiles(
 
   const cesConfig = {
     // Add the version of create expo stack used
-    cesVersion: require('../../package.json').version || '2.0.0',
+    cesVersion: pkg.version || '2.0.0',
     ...cliResults,
     packageManager: {
       type: cliResults.flags.packageManager,
@@ -385,8 +386,6 @@ export function configureProjectFiles(
 // It is safe to delete this file as it does not affect the functionality of your application.
 ${JSON.stringify(cesConfig, null, 2)}`
   );
-
-  const pkg = require('../../package.json');
 
   storeConfigAnalytics({
     timestamp: new Date().toISOString(),

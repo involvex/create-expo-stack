@@ -32,8 +32,14 @@
     "build:docs": "turbo build --filter create-expo-stack-docs",
     "build:rn-new": "turbo build --filter rn-new",
     "dl-contrib": "bun scripts/generate-contributors.ts",
-    "format": "eslint -c .eslintrc.js --fix \"**/*.{js,jsx,ts,tsx}\" && prettier \"**/*.{astro,css,ejs,js,json,jsx,md,mdx,mjs,ts,tsx,yaml,yml}\" --write",
-    "prepare": "is-ci || husky install"
+    "format": "prettier \"**/*.{astro,css,ejs,js,json,jsx,md,mdx,mjs,ts,tsx,yaml,yml}\" --write",
+    "prepare": "is-ci || husky install",
+    "lint": "eslint . --ignore-pattern www --ignore-pattern docs --ignore-pattern cli --ext .js,.jsx,.ts,.tsx --max-warnings 0 && bun run lint:cli",
+    "lint:fix": "eslint . --ignore-pattern www --ignore-pattern docs --ignore-pattern cli --ext .js,.jsx,.ts,.tsx --max-warnings 0 --fix && bun run lint:fix:cli",
+    "lint:cli": "bun --filter=create-expo-stack run lint",
+    "lint:fix:cli": "bun --filter=create-expo-stack run lint:fix",
+    "typecheck": "tsc --noEmit",
+    "check": "bun run format && bun run lint:fix && bun run typecheck"
   },
   "prettier": {
     "semi": true,
@@ -50,30 +56,35 @@
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.30.0",
     "@changesets/get-release-plan": "^3.0.17",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
+    "@eslint/js": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^8.70.0",
+    "@typescript-eslint/parser": "^8.70.0",
     "bun-types": "^1.4.2",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^9.1.2",
-    "eslint-plugin-prettier": "^5.5.5",
+    "eslint": "^10.10.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "globals": "^17.12.0",
     "husky": "^5.2.0",
     "is-ci": "^3.0.1",
+    "jiti": "^2.7.0",
     "lint-staged": "^12.5.0",
     "octokit": "^3.2.2",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
     "turbo": "^2.10.12",
-    "typescript": "latest"
+    "typescript": "latest",
+    "typescript-eslint": "^8.70.0"
   },
   "packageManager": "bun@1.4.2",
   "dependencies": {
     "@clack/prompts": "^1.2.0",
+    "dotenv": "^17.4.2",
     "expo": "~57.0.21",
-    "lucide-astro": "^0.395.0",
-    "picocolors": "^1.1.1",
     "google-auth-library": "^9.15.1",
-    "googleapis": "^140.0.1"
+    "googleapis": "^140.0.1",
+    "lucide-astro": "^0.395.0",
+    "picocolors": "^1.1.1"
   }
 }

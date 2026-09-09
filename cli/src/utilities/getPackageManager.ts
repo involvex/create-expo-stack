@@ -1,3 +1,4 @@
+import { execSync } from 'child_process';
 import { Toolbox } from 'gluegun/build/types/domain/toolbox';
 import { CliResults } from '../types';
 
@@ -84,10 +85,10 @@ export function getDefaultPackageManagerVersion() {
 
 export function getVersionForPackageManager(packageManager: PackageManager): string {
   try {
-    const version = require('child_process').execSync(`${packageManager} --version`);
+    const version = execSync(`${packageManager} --version`);
 
     return version.toString().replace('\n', '');
-  } catch (_error) {
+  } catch {
     // this happens with yarn because its dumb
     console.log(`Error getting version for package manager ${packageManager}`);
     return 'unknown';

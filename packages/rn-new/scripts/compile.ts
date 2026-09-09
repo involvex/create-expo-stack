@@ -9,10 +9,11 @@ async function compile() {
     await mkdir(binDir, { recursive: true });
 
     const content = `#!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-require-imports */
 
 try {
   require("create-expo-stack/bin/create-expo-stack.js");
-} catch (error) {
+} catch {
   console.error("Error: Could not find create-expo-stack package.");
   console.error("Please ensure create-expo-stack is installed globally.");
   process.exit(1);
@@ -25,6 +26,10 @@ try {
     try {
       await chmod(binFile, 0o755);
     } catch (_err) {
+      console.warn(
+        'Warning: Could not set executable permissions on rn-new.js. This may be due to platform limitations.',
+        _err
+      );
       // Ignore errors on platforms where chmod is not supported
     }
 
