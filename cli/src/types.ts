@@ -46,6 +46,8 @@ export type Internalization = 'i18next';
 
 export type Analytics = 'vexo-analytics';
 
+export type PagePreset = 'settings' | 'profile' | 'login' | 'signup';
+
 export type SelectedComponents =
   | 'action-sheet'
   | 'activity-indicator'
@@ -63,7 +65,7 @@ export type SelectedComponents =
 export type AvailablePackages = {
   name: (typeof availablePackages)[number];
   type: 'navigation' | 'styling' | 'authentication' | 'internationalization' | 'state-management' | 'analytics';
-  options?: { selectedComponents?: SelectedComponents[]; type?: NavigationTypes };
+  options?: { selectedComponents?: SelectedComponents[]; type?: NavigationTypes; pagePresets?: PagePreset[] };
 };
 
 export interface CliResults {

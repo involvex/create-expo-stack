@@ -1,0 +1,27 @@
+﻿import { View, ScrollView, TextInput, Pressable } from "react-native";
+import { Text } from "react-native-text";
+import { Ionicons } from "@expo/vector-icons";
+
+export default function LoginPage() {
+  return (
+    <ScrollView className="flex-1 bg-white dark:bg-black p-4">
+      <View className="mt-20 items-center">
+        <Text className="text-3xl font-bold text-gray-900 dark:text-white">Welcome Back</Text>
+        <Text className="text-gray-500 dark:text-gray-400 mt-2">Sign in to continue</Text>
+      </View>
+      <View className="mt-10 space-y-4">
+        <View>
+          <Text className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Email</Text>
+          <TextInput className="w-full bg-gray-100 dark:bg-gray-900 p-4 rounded-xl text-gray-900 dark:text-white" placeholder="email@example.com" />
+        </View>
+        <View>
+          <Text className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Password</Text>
+          <TextInput className="w-full bg-gray-100 dark:bg-gray-900 p-4 rounded-xl text-gray-900 dark:text-white" placeholder="••••••••" secureTextEntry />
+        </View>
+        <Pressable className="w-full bg-blue-500 py-4 rounded-xl items-center mt-6">
+          <Text className="text-white font-bold text-lg">Sign In</Text>
+        </Pressable>
+      </View>
+    </ScrollView>
+  );
+}

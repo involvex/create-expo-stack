@@ -32,6 +32,7 @@
   "dependencies": {
     <% if (props.stylingPackage?.name === "nativewind" || props.stylingPackage?.name === "nativewindui") { %>
       "nativewind": "latest",
+      "react-native-text": "latest",
     <% } %>
     <% if (props.stylingPackage?.name === "nativewindui") { %>
       "@shopify/flash-list": "2.0.2",
@@ -42,7 +43,7 @@
       "rn-icon-mapper": "^0.0.1",
       "expo-haptics": "~55.0.0",
       "expo-symbols": "~55.0.0",
-      <% if (props.stylingPackage?.options.selectedComponents.includes('date-picker')) { %>
+      <% if (props.stylingPackage?.options.selectedComponents.includes('date-picker') || (props.stylingPackage?.options.pagePresets && props.stylingPackage?.options.pagePresets.includes('settings'))) { %>
         "@react-native-community/datetimepicker": "8.4.4",
       <% } %>
       <% if (props.stylingPackage?.options.selectedComponents.includes('picker')) { %>
@@ -56,6 +57,13 @@
       <% } %>
       <% if (props.stylingPackage?.options.selectedComponents.includes('slider')) { %>
         "@react-native-community/slider": "5.0.1",
+      <% } %>
+      <% if (props.stylingPackage?.options.pagePresets && (props.stylingPackage?.options.pagePresets.includes('login') || props.stylingPackage?.options.pagePresets.includes('signup'))) { %>
+        "expo-auth-session": "~55.0.0",
+        "expo-crypto": "~55.0.0",
+      <% } %>
+      <% if (props.stylingPackage?.options.pagePresets && props.stylingPackage?.options.pagePresets.includes('profile')) { %>
+        "expo-mail-composer": "~55.0.0",
       <% } %>
     <% } %>
 

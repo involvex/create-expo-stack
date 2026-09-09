@@ -1,4 +1,4 @@
-import { Toolbox } from 'gluegun/build/types/domain/toolbox';
+﻿import { Toolbox } from 'gluegun/build/types/domain/toolbox';
 import os from 'os';
 import {
   Analytics,
@@ -116,6 +116,22 @@ export function configureProjectFiles(
       nativewindUIFiles = [...nativewindUIFiles, ...nativewindUIDrawerFiles];
     }
 
+    // Add page presets if selected
+    if (stylingPackage?.options?.pagePresets) {
+      if (stylingPackage.options.pagePresets.includes('settings')) {
+        nativewindUIFiles.push('packages/nativewind/components/Settings.tsx.ejs');
+      }
+      if (stylingPackage.options.pagePresets.includes('profile')) {
+        nativewindUIFiles.push('packages/nativewind/components/Profile.tsx.ejs');
+      }
+      if (stylingPackage.options.pagePresets.includes('login')) {
+        nativewindUIFiles.push('packages/nativewind/components/Login.tsx.ejs');
+      }
+      if (stylingPackage.options.pagePresets.includes('signup')) {
+        nativewindUIFiles.push('packages/nativewind/components/Signup.tsx.ejs');
+      }
+    }
+
     files = nativewindUIFiles;
   } else {
     files = [...baseFiles];
@@ -131,6 +147,21 @@ export function configureProjectFiles(
         'packages/nativewind/metro.config.js',
         'packages/nativewind/global.css'
       ];
+
+      if (stylingPackage.options?.pagePresets) {
+        if (stylingPackage.options.pagePresets.includes('settings')) {
+          nativewindFiles.push('packages/nativewind/components/Settings.tsx.ejs');
+        }
+        if (stylingPackage.options.pagePresets.includes('profile')) {
+          nativewindFiles.push('packages/nativewind/components/Profile.tsx.ejs');
+        }
+        if (stylingPackage.options.pagePresets.includes('login')) {
+          nativewindFiles.push('packages/nativewind/components/Login.tsx.ejs');
+        }
+        if (stylingPackage.options.pagePresets.includes('signup')) {
+          nativewindFiles.push('packages/nativewind/components/Signup.tsx.ejs');
+        }
+      }
 
       files = [...files, ...nativewindFiles];
     }

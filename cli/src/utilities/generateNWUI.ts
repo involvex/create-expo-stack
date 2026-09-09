@@ -1,6 +1,5 @@
-import { GluegunToolbox } from 'gluegun';
+﻿import { GluegunToolbox } from 'gluegun';
 import { CliResults } from '../types';
-import { nativewindUIOptions } from '../constants';
 import { getPackageManagerRunnerX } from './getPackageManager';
 import { ONLY_ERRORS, runSystemCommand } from './systemCommand';
 import { spinner } from '@clack/prompts';
@@ -16,30 +15,22 @@ export async function generateNWUI(cliResults: CliResults, toolbox: GluegunToolb
 
   const runnerType = getPackageManagerRunnerX(toolbox, cliResults);
 
-  const nativewindUIComponents =
-    cliResults.packages.find((p) => p.name === 'nativewindui').options.selectedComponents ?? [];
-
-  // we do this to account for older stored config e.g that has selectable text in it
-  const onlySupportedComponents = nativewindUIComponents.filter((component) => nativewindUIOptions.includes(component));
-
-  const finalComponents = Array.from(new Set([...onlySupportedComponents, 'text', 'button']));
-
-  s.start(`Adding nativewindui components...`);
+  s.start('Adding nativewindui components...');
 
   const flags = cliResults.flags.noInstall
-    ? `--yes --no-install --quiet -d ${cliResults.projectName}`
-    : `--yes --quiet -d ${cliResults.projectName}`;
+    ? '--yes --no-install --quiet -d ${cliResults.projectName}'
+    : '--yes --quiet -d ${cliResults.projectName}';
 
   // --yes accepts installing packages without prompting
   const runCommand = runnerType === 'npx' ? `${runnerType} --yes` : runnerType;
 
   if (process.env.NODE_ENV === 'development') {
-    toolbox.print.info(`${runCommand} nwui-cli@latest add ${flags} ${finalComponents.join(' ')}`);
+    toolbox.print.info(`${runCommand} nwui-cli@latest add free ${flags}`);
   }
 
   // @latest is getting cached when using bunx
   await runSystemCommand({
-    command: `${runCommand} nwui-cli@latest add ${flags} ${finalComponents.join(' ')}`,
+    command: `${runCommand} nwui-cli@latest add free ${flags}`,
     errorMessage: 'Error adding nativewindui components',
     toolbox,
     stdio: ONLY_ERRORS,

@@ -2,7 +2,7 @@ import { cancel, confirm, isCancel, multiselect, select, text } from '@clack/pro
 import { Toolbox } from 'gluegun/build/types/domain/toolbox';
 
 import { semver } from 'gluegun';
-import { bunInstallationError, defaultOptions, nativewindUIOptions } from '../constants';
+import { bunInstallationError, defaultOptions, nativewindUIOptions, pagePresetOptions } from '../constants';
 import {
   AuthenticationSelect,
   StateManagementSelect,
@@ -10,6 +10,7 @@ import {
   NavigationSelect,
   NavigationTypes,
   PackageManager,
+  PagePreset,
   SelectedComponents,
   StylingSelect
 } from '../types';
@@ -369,6 +370,32 @@ export async function runCLI(toolbox: Toolbox, projectName: string): Promise<Cli
     cliResults.packages.push({ name: authenticationSelect as AuthenticationSelect, type: 'authentication' });
   } else {
     success(`No problem, skipping authentication for now.`);
+  }
+
+  // ONLY ASK FOR PAGE PRESETS IF STYLING IS NATIVEWIND OR NATIVEWINDUI
+  if (stylingSelect === 'nativewind' || stylingSelect === 'nativewindui') {
+    const selectedPagePresets = await multiselect({
+      message: 'Which page presets would you like to include?',
+      options: pagePresetOptions,
+      required: false
+    });
+
+    if (isCancel(selectedPagePresets)) {
+      cancel('Cancelled... 👋');
+      return process.exit(0);
+    }
+
+    if (selectedPagePresets.length > 0) {
+      // Add page presets to the styling package options
+      const stylingPackage = cliResults.packages.find((p) => p.type === 'styling');
+      if (stylingPackage) {
+        stylingPackage.options = {
+          ...stylingPackage.options,
+          pagePresets: selectedPagePresets as PagePreset[]
+        };
+      }
+      success(`Added ${selectedPagePresets.length} page presets.`);
+    }
   }
 
   const easEnabled = await confirm({

@@ -4,7 +4,7 @@
   "description": "Shorthand for create-expo-stack",
   "repository": {
     "type": "git",
-    "url": "https://github.com/roninoss/create-expo-stack.git",
+    "url": "https://github.com/involvex/create-expo-stack.git",
     "directory": "packages/rn-new"
   },
   "homepage": "https://rn.new",

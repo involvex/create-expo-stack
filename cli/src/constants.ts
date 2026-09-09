@@ -35,6 +35,13 @@ export const nativewindUIOptions: SelectedComponents[] = [
   'toggle'
 ];
 
+export const pagePresetOptions: { value: 'settings' | 'profile' | 'login' | 'signup'; label: string }[] = [
+  { value: 'settings', label: 'Settings Page' },
+  { value: 'profile', label: 'Profile Page' },
+  { value: 'login', label: 'Login Page' },
+  { value: 'signup', label: 'Signup Page' }
+];
+
 export const navigationValidationError = `You must pass in either --react-navigation or --expo-router if you want to use the --tabs or --drawer+tabs options`;
 export const projectNameValidationError = `A project with the name`;
 export const bunInstallationError = 'Cancelled to install recommended version of Bun.';
