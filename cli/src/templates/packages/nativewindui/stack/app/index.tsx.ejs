@@ -103,15 +103,15 @@ function ListEmptyComponent() {
   return (
     <View style={{ height }} className="flex-1 items-center justify-center gap-1 px-12">
       <Icon name="doc.badge.plus" size={42} color={colors.grey} />
-        <Text variant='title3' className='pb-1 text-center font-semibold'>
+        <Text variant="title3" className="pb-1 text-center font-semibold">
           No Components Installed
         </Text>
-        <Text color='tertiary' variant='subhead' className='pb-4 text-center'>
+        <Text color="tertiary" variant="subhead" className="pb-4 text-center">
           You can install any of the free components from the{' '}
           <Text
             onPress={() => Linking.openURL('https://nativewindui.com')}
-            variant='subhead'
-            className='text-primary'
+            variant="subhead"
+            className="text-primary"
           >
             NativewindUI
           </Text>
@@ -170,7 +170,7 @@ const COMPONENTS: ComponentItem[] = [
     component: function AvatarExample() {
       const TWITTER_AVATAR_URI = 'https://pbs.twimg.com/profile_images/1782428433898708992/1voyv4_A_400x400.jpg';
       return (
-        <View className='items-center'>
+        <View className="items-center">
           <Avatar alt="NativewindUI Avatar">
             <AvatarImage source={{ uri: TWITTER_AVATAR_URI }} />
             <AvatarFallback>
@@ -224,7 +224,7 @@ const COMPONENTS: ComponentItem[] = [
     name: 'Activity Indicator',
     component: function ActivityIndicatorExample() {
       return (
-        <View className='items-center p-4'>
+        <View className="items-center p-4">
           <ActivityIndicator />
         </View>
       );
@@ -239,9 +239,9 @@ const COMPONENTS: ComponentItem[] = [
       const { showActionSheetWithOptions } = useActionSheet();
       
       return (
-        <View className='items-center'>
+        <View className="items-center">
           <Button
-            variant='secondary'
+            variant="secondary"
             onPress={async () => {
               const options = ['Delete', 'Save', 'Cancel'];
               const destructiveButtonIndex = 0;
@@ -300,7 +300,7 @@ const COMPONENTS: ComponentItem[] = [
         };
       }, []);
       return (
-        <View className='p-4'>
+        <View className="p-4">
           <ProgressIndicator value={progress} />
         </View>
       );
@@ -312,9 +312,9 @@ const COMPONENTS: ComponentItem[] = [
     name: 'Activity View',
     component: function ActivityViewExample() {
       return (
-        <View className='items-center'>
+        <View className="items-center">
           <Button
-            variant='tonal'
+            variant="tonal"
             onPress={async () => {
               try {
                 const result = await Share.share({
@@ -346,10 +346,10 @@ const COMPONENTS: ComponentItem[] = [
     component: function DatePickerExample() {
       const [date, setDate] = React.useState(new Date());
       return (
-        <View className='items-center'>
+        <View className="items-center">
           <DatePicker
             value={date}
-            mode='datetime'
+            mode="datetime"
             onChange={(ev) => {
               setDate(new Date(ev.nativeEvent.timestamp));
             }}
@@ -372,24 +372,24 @@ const COMPONENTS: ComponentItem[] = [
           onValueChange={(itemValue) => setPicker(itemValue)}
         >
           <PickerItem
-            label='Red'
-            value='red'
+            label="Red"
+            value="red"
             color={colors.foreground}
             style={{
               backgroundColor: colors.root,
             }}
           />
           <PickerItem
-            label='Blue'
-            value='blue'
+            label="Blue"
+            value="blue"
             color={colors.foreground}
             style={{
               backgroundColor: colors.root,
             }}
           />
           <PickerItem
-            label='Green'
-            value='green'
+            label="Green"
+            value="green"
             color={colors.foreground}
             style={{
               backgroundColor: colors.root,
@@ -448,8 +448,8 @@ const COMPONENTS: ComponentItem[] = [
     component: function ToggleExample() {
       const [switchValue, setSwitchValue] = React.useState(true);
       return (
-        <View className='items-center'>
-          <Toggle value={switchValue} onValueChange={setSwitchValue} className='mx-auto' />
+        <View className="items-center">
+          <Toggle value={switchValue} onValueChange={setSwitchValue} className="mx-auto" />
         </View>
       );
     }
