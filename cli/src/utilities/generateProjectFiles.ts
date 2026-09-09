@@ -33,6 +33,10 @@ export function generateProjectFiles(
       target = target.replace('packages/zustand/', '');
     }
 
+    if (stateManagementPackage?.name === 'jotai') {
+      target = target.replace('packages/jotai/', '');
+    }
+
     target = target.replace('base/', '');
 
     if (stylingPackage?.name === 'unistyles') {
@@ -70,6 +74,10 @@ export function generateProjectFiles(
 
     if (analyticsPackage?.name === 'vexo-analytics') {
       target = target.replace('packages/vexo-analytics/', '');
+    }
+
+    if (analyticsPackage?.name === 'posthog') {
+      target = target.replace('packages/posthog/', '');
     }
 
     const gen = toolbox.template.generate({

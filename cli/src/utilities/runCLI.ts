@@ -11,6 +11,7 @@ import {
   NavigationTypes,
   PackageManager,
   PagePreset,
+  Analytics,
   SelectedComponents,
   StylingSelect
 } from '../types';
@@ -325,14 +326,15 @@ export async function runCLI(toolbox: Toolbox, projectName: string): Promise<Cli
     );
   }
 
+  const stateManagementOptions: Array<{ value: StateManagementSelect; label: string }> = [
+    { value: undefined, label: 'None' },
+    { value: 'zustand', label: 'Zustand' },
+    { value: 'jotai', label: 'Jotai' }
+  ];
+
   const stateManagementSelect = await select({
     message: 'What would you like to use for state management?',
-    options: [
-      { value: undefined, label: 'None' },
-      { value: 'zustand', label: 'Zustand' }
-      // { value: 'mobx', label: 'MobX' },
-      // { value: 'redux', label: 'Redux' },
-    ]
+    options: stateManagementOptions
   });
 
   if (isCancel(stateManagementSelect)) {
@@ -396,6 +398,29 @@ export async function runCLI(toolbox: Toolbox, projectName: string): Promise<Cli
       }
       success(`Added ${selectedPagePresets.length} page presets.`);
     }
+  }
+
+  const analyticsOptions: Array<{ value: Analytics; label: string }> = [
+    { value: undefined, label: 'None' },
+    { value: 'vexo-analytics', label: 'Vexo Analytics' },
+    { value: 'posthog', label: 'PostHog' }
+  ];
+
+  const analyticsSelect = await select({
+    message: 'What would you like to use for analytics?',
+    options: analyticsOptions
+  });
+
+  if (isCancel(analyticsSelect)) {
+    cancel('Cancelled... 👋');
+    return process.exit(0);
+  }
+
+  if (analyticsSelect) {
+    cliResults.packages.push({ name: analyticsSelect as Analytics, type: 'analytics' });
+    success(`You'll be using ${analyticsSelect === 'posthog' ? 'PostHog' : 'Vexo Analytics'} for analytics.`);
+  } else {
+    success(`No problem, skipping analytics for now.`);
   }
 
   const easEnabled = await confirm({

@@ -26,6 +26,12 @@ import { vexo } from 'vexo-analytics';
 vexo(process.env.EXPO_PUBLIC_VEXO_API_KEY); // eslint-disable-line
 
 import Navigation from './navigation'; // eslint-disable-line
+<% } else if (props.analyticsPackage?.name === "posthog") { %>
+import { posthog } from '@/utils/posthog';
+
+void posthog;
+
+import Navigation from './navigation';
 <% } else { %>
 import Navigation from './navigation';
 <% } %>

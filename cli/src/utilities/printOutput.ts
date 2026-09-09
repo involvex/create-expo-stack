@@ -175,6 +175,20 @@ export async function printOutput(
     info(``);
   };
 
+  const printPostHogSteps = () => {
+    info(``);
+    highlight('Head over to https://app.posthog.com to create a new PostHog project.');
+    info(``);
+    highlight(`Get the API key:`);
+    info(`1. Create a new project in your PostHog dashboard.`);
+    highlight(`https://app.posthog.com`);
+    info(`2. Find your Project API key in the project settings.`);
+    info(`3. Copy the key and paste it into your .env file.`);
+    info(`4. Optionally, follow the docs to get started with PostHog:`);
+    highlight(`https://posthog.com/docs`);
+    info(``);
+  };
+
   //	check if packages includes package with name "supabase"
   if (cliResults.packages.some((pkg) => pkg.name === 'supabase')) {
     success(`\nSuccess! 🎉 Now, here's what's next:`);
@@ -189,6 +203,9 @@ export async function printOutput(
     highlight(`https://docs.expo.dev/guides/using-supabase/#next-steps`);
     if (cliResults.packages.some((pkg) => pkg.name === 'vexo-analytics')) {
       printVexoSteps();
+    }
+    if (cliResults.packages.some((pkg) => pkg.name === 'posthog')) {
+      printPostHogSteps();
     }
     success(`Once you're done, run the following to get started: `);
     info(``);
@@ -207,12 +224,19 @@ export async function printOutput(
     if (cliResults.packages.some((pkg) => pkg.name === 'vexo-analytics')) {
       printVexoSteps();
     }
+    if (cliResults.packages.some((pkg) => pkg.name === 'posthog')) {
+      printPostHogSteps();
+    }
     success(`Once you're done, run the following to get started: `);
     info(``);
   } else {
     if (cliResults.packages.some((pkg) => pkg.name === 'vexo-analytics')) {
       success(`Success! 🎉 Now, here's what's next:`);
       printVexoSteps();
+      success(`Once you're done, run the following to get started: `);
+    } else if (cliResults.packages.some((pkg) => pkg.name === 'posthog')) {
+      success(`Success! 🎉 Now, here's what's next:`);
+      printPostHogSteps();
       success(`Once you're done, run the following to get started: `);
     } else {
       success('\nSuccess! 🎉 Now, just run the following to get started: ');

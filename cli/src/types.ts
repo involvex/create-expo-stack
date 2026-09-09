@@ -27,7 +27,9 @@ export const availablePackages = [
   'unistyles',
   'i18next',
   'zustand',
-  'vexo-analytics'
+  'jotai',
+  'vexo-analytics',
+  'posthog'
 ] as const;
 
 export type AuthenticationSelect = 'supabase' | 'firebase' | undefined;
@@ -40,11 +42,11 @@ export type StylingSelect = 'nativewind' | 'stylesheet' | 'unistyles' | 'nativew
 
 export type PackageManager = 'yarn' | 'npm' | 'pnpm' | 'bun';
 
-export type StateManagementSelect = 'zustand' | undefined;
+export type StateManagementSelect = 'zustand' | 'jotai' | undefined;
 
 export type Internalization = 'i18next';
 
-export type Analytics = 'vexo-analytics';
+export type Analytics = 'vexo-analytics' | 'posthog';
 
 export type PagePreset = 'settings' | 'profile' | 'login' | 'signup';
 

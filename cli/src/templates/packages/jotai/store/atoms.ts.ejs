@@ -1,0 +1,18 @@
+import { atom } from 'jotai';
+
+export const countAtom = atom(0);
+
+export const incrementAtom = atom(
+  (get) => get(countAtom),
+  (get, set) => set(countAtom, get(countAtom) + 1)
+);
+
+export const decrementAtom = atom(
+  (get) => get(countAtom),
+  (get, set) => set(countAtom, get(countAtom) - 1)
+);
+
+export const resetAtom = atom(
+  (get) => get(countAtom),
+  (_get, set) => set(countAtom, 0)
+);

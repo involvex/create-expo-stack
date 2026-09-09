@@ -22,6 +22,11 @@ import { StatusBar } from 'expo-status-bar';
 
   vexo(process.env.EXPO_PUBLIC_VEXO_API_KEY);
 <% } %>
+<% if (props.analyticsPackage?.name === "posthog") { %>
+  import { posthog } from '@/utils/posthog';
+
+  void posthog;
+<% } %>
 
 export default function App() {
   return (

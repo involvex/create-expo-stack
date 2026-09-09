@@ -316,6 +316,13 @@ const command: GluegunCommand = {
           });
         }
 
+        if (options.jotai) {
+          cliResults.packages.push({
+            name: 'jotai',
+            type: 'state-management'
+          });
+        }
+
         // Internalization packages
         if (options.i18next) {
           cliResults.packages.push({
@@ -327,6 +334,10 @@ const command: GluegunCommand = {
         // Analytics packages
         if (options.vexoAnalytics || options['vexo-analytics'] || options.vexoanalytics) {
           cliResults.packages.push({ name: 'vexo-analytics', type: 'analytics' });
+        }
+
+        if (options.posthog) {
+          cliResults.packages.push({ name: 'posthog', type: 'analytics' });
         }
 
         // By this point, all cliResults should be set

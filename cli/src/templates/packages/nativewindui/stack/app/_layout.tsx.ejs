@@ -1,5 +1,9 @@
 import '@/global.css';
 
+<% if (props.analyticsPackage?.name === "posthog") { %>
+import { posthog } from '@/utils/posthog';
+void posthog;
+<% } %>
 <% if (props.stylingPackage?.options.selectedComponents.includes('action-sheet')) { %>
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 <% } %>

@@ -333,11 +333,11 @@ export function configureProjectFiles(
     }
 
     // add supabase files if needed
-    // (skip the .env file when vexo is selected: the vexo .env template already includes the auth keys)
+    // (skip the .env file when vexo or posthog is selected: their .env templates include the auth keys)
     if (authenticationPackage?.name === 'supabase') {
       const supabaseFiles = ['packages/supabase/utils/supabase.ts.ejs'];
 
-      if (analyticsPackage?.name !== 'vexo-analytics') {
+      if (analyticsPackage?.name !== 'vexo-analytics' && analyticsPackage?.name !== 'posthog') {
         supabaseFiles.push('packages/supabase/.env.ejs');
       }
 
@@ -348,7 +348,7 @@ export function configureProjectFiles(
     if (authenticationPackage?.name === 'firebase') {
       const firebaseFiles = ['packages/firebase/utils/firebase.ts.ejs', 'packages/firebase/metro.config.js.ejs'];
 
-      if (analyticsPackage?.name !== 'vexo-analytics') {
+      if (analyticsPackage?.name !== 'vexo-analytics' && analyticsPackage?.name !== 'posthog') {
         firebaseFiles.push('packages/firebase/.env.ejs');
       }
 
@@ -360,6 +360,13 @@ export function configureProjectFiles(
       const vexoFiles = ['packages/vexo-analytics/.env.ejs'];
 
       files = [...files, ...vexoFiles];
+    }
+
+    // add posthog analytics files if needed
+    if (analyticsPackage?.name === 'posthog') {
+      const posthogFiles = ['packages/posthog/utils/posthog.ts.ejs', 'packages/posthog/.env.ejs'];
+
+      files = [...files, ...posthogFiles];
     }
 
     // add i18next files if needed
@@ -382,6 +389,11 @@ export function configureProjectFiles(
   if (stateManagementPackage?.name === 'zustand') {
     const zustandFiles = ['packages/zustand/store/store.ts.ejs'];
     files = [...files, ...zustandFiles];
+  }
+
+  if (stateManagementPackage?.name === 'jotai') {
+    const jotaiFiles = ['packages/jotai/store/atoms.ts.ejs'];
+    files = [...files, ...jotaiFiles];
   }
 
   // Add npmrc file if user is using pnpm

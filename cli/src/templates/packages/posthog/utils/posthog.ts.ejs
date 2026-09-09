@@ -1,0 +1,16 @@
+import { PostHog } from 'posthog-react-native';
+
+const posthogApiKey = process.env.EXPO_PUBLIC_POSTHOG_API_KEY;
+
+if (!posthogApiKey) {
+  throw new Error('Missing PostHog API key. Check your .env file.');
+}
+
+export const posthog = new PostHog({
+  apiKey: posthogApiKey,
+  options: {
+    // Enable in dev mode to test events
+    // Remove this in production if desired
+    enabled: process.env.NODE_ENV !== 'test',
+  },
+});
