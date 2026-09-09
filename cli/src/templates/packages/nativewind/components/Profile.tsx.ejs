@@ -1,0 +1,43 @@
+import { View, ScrollView, TextInput, Pressable, Image } from 'react-native';
+import { Text } from 'react-native-text';
+import { Ionicons } from '@expo/vector-icons';
+
+export default function ProfilePage() {
+  return (
+    <ScrollView className="flex-1 bg-white dark:bg-black">
+      <View className="items-center py-8">
+        <View className="relative">
+          <Image
+            source={{ uri: 'https://pbs.twimg.com/profile_images/1782428433898708992/1voyv4_A_400x400.jpg' }}
+            className="w-32 h-32 rounded-full"
+          />
+          <Pressable className="absolute bottom-0 right-0 bg-blue-500 rounded-full p-2">
+            <Ionicons name="camera" size={20} color="white" />
+          </Pressable>
+        </View>
+        <Text className="text-2xl font-bold text-gray-900 dark:text-white mt-4">Jane Doe</Text>
+        <Text className="text-gray-500 dark:text-gray-400">jane@example.com</Text>
+      </View>
+
+      <View className="px-4 mt-6 space-y-4">
+        <Pressable className="flex-row items-center p-4 bg-gray-50 dark:bg-gray-900 rounded-xl">
+          <Ionicons name="person-circle-outline" size={24} color="#6366f1" />
+          <Text className="ml-4 text-base text-gray-900 dark:text-white">Personal Information</Text>
+          <Ionicons name="chevron-forward" size={20} color="#9ca3af" className="ml-auto" />
+        </Pressable>
+
+        <Pressable className="flex-row items-center p-4 bg-gray-50 dark:bg-gray-900 rounded-xl">
+          <Ionicons name="lock-closed-outline" size={24} color="#6366f1" />
+          <Text className="ml-4 text-base text-gray-900 dark:text-white">Change Password</Text>
+          <Ionicons name="chevron-forward" size={20} color="#9ca3af" className="ml-auto" />
+        </Pressable>
+
+        <Pressable className="flex-row items-center p-4 bg-gray-50 dark:bg-gray-900 rounded-xl">
+          <Ionicons name="notifications-outline" size={24} color="#6366f1" />
+          <Text className="ml-4 text-base text-gray-900 dark:text-white">Notifications</Text>
+          <Ionicons name="chevron-forward" size={20} color="#9ca3af" className="ml-auto" />
+        </Pressable>
+      </View>
+    </ScrollView>
+  );
+}

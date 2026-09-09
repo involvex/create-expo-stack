@@ -1,4 +1,3 @@
-import { useHeaderHeight } from '@react-navigation/elements';
 import { FlashList } from '@shopify/flash-list';
 import { cssInterop } from 'nativewind';
 import * as React from 'react';
@@ -21,11 +20,10 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { SearchBarProps } from 'react-native-screens';
 <% if (props.stylingPackage?.options.selectedComponents.includes('action-sheet')) { %>
 import { useActionSheet } from '@expo/react-native-action-sheet';
 <% } %>
-import { useNavigation } from '@react-navigation/native';
+import { useHeaderHeight } from '@react-navigation/elements';
 <% if (props.stylingPackage?.options.selectedComponents.includes('button')) { %>
 import * as Haptics from 'expo-haptics';
 <% } else { %>
@@ -65,7 +63,7 @@ import { Text } from '@/components/nativewindui/Text';
 import { Toggle } from '@/components/nativewindui/Toggle';
 <% } %>
 import { useColorScheme } from '@/lib/useColorScheme';
-import { COLORS } from '@/theme/colors';
+import { useHeaderSearchBar } from '@/lib/useHeaderSearchBar';
 
 cssInterop(FlashList, {
   className: 'style',
@@ -86,39 +84,13 @@ export default function Screen() {
       data={data}
       contentContainerClassName="py-4 android:pb-12"
       extraData={searchValue}
-      removeClippedSubviews={false} // used for slecting text on android
+      removeClippedSubviews={false} // used for selecting text on android
       keyExtractor={keyExtractor}
       ItemSeparatorComponent={renderItemSeparator}
       renderItem={renderItem}
       ListEmptyComponent={COMPONENTS.length === 0 ? ListEmptyComponent : undefined}
     />
   );
-}
-
-function useHeaderSearchBar(props: SearchBarProps = {}) {
-  const { colorScheme, colors } = useColorScheme();
-  const navigation = useNavigation();
-  const [search, setSearch] = React.useState('');
-
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerSearchBarOptions: {
-        placeholder: 'Search...',
-        textColor: colors.foreground,
-        tintColor: colors.primary,
-        headerIconColor: colors.foreground,
-        hintTextColor: colors.grey,
-        hideWhenScrolling: false,
-        onChangeText(ev) {
-          setSearch(ev.nativeEvent.text);
-        },
-        ...props,
-      } satisfies SearchBarProps,
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigation, colorScheme]);
-  
-  return search;
 }
 
 function ListEmptyComponent() {

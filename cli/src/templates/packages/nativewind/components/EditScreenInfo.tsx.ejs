@@ -13,10 +13,10 @@ export const EditScreenInfo: React.FC<EditScreenInfoProps> = ({ path }) => {
 <% if (props.internalizationPackage?.name === "i18next") { %>
   const { t } = useTranslation();
   const title = t('getStarted');
-  const description = t('changeCode')
+  const description = t('changeCode');
 <% } else { %>
-  const title = "Open up the code for this screen:"
-  const description = "Change any of the text, save the file, and your app will automatically update."
+  const title = 'Open up the code for this screen:';
+  const description = 'Change any of the text, save the file, and your app will automatically update.';
 <% } %>
   return (
     <View>

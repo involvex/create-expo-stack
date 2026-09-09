@@ -34,7 +34,8 @@ export function configureProjectFiles(
     'base/package.json.ejs',
     'base/eslint.config.js.ejs',
     'base/.gitignore.ejs',
-    'base/prettier.config.js.ejs'
+    'base/prettier.config.js.ejs',
+    'base/README.md.ejs'
   ];
 
   if (stylingPackage?.name === 'stylesheet') {
@@ -60,6 +61,7 @@ export function configureProjectFiles(
       'packages/nativewindui/components/nativewindui/Icon/types.ts.ejs',
       'packages/nativewindui/lib/useColorScheme.tsx.ejs',
       'packages/nativewindui/lib/cn.ts.ejs',
+      'packages/nativewindui/lib/useHeaderSearchBar.ts.ejs',
       'packages/nativewindui/theme/colors.ts.ejs',
       'packages/nativewindui/theme/index.ts.ejs',
       'packages/nativewindui/theme/with-opacity.ts.ejs',
@@ -69,6 +71,14 @@ export function configureProjectFiles(
     ];
 
     // Add navigation-specific components only when needed
+    if (navigationPackage?.options?.type === 'stack') {
+      nativewindUIFiles.push(
+        'packages/nativewindui/components/Container.tsx.ejs',
+        'packages/nativewindui/components/ScreenContent.tsx.ejs',
+        'packages/nativewindui/components/EditScreenInfo.tsx.ejs'
+      );
+    }
+
     if (navigationPackage?.options?.type === 'tabs' || navigationPackage?.options?.type === 'drawer + tabs') {
       nativewindUIFiles.push(
         'packages/nativewindui/components/Container.tsx.ejs',
@@ -83,8 +93,7 @@ export function configureProjectFiles(
       'packages/nativewindui/stack/app/_layout.tsx.ejs',
       'packages/nativewindui/stack/app/index.tsx.ejs',
       'packages/nativewindui/stack/app/modal.tsx.ejs',
-      'packages/nativewindui/stack/app/+not-found.tsx.ejs',
-      'packages/nativewindui/stack/app/+html.tsx.ejs'
+      'packages/nativewindui/stack/app/+not-found.tsx.ejs'
     ];
 
     const nativewindUITabsFiles = [
@@ -93,8 +102,7 @@ export function configureProjectFiles(
       'packages/nativewindui/tabs/app/(tabs)/two.tsx.ejs',
       'packages/nativewindui/tabs/app/_layout.tsx.ejs',
       'packages/nativewindui/tabs/app/modal.tsx.ejs',
-      'packages/nativewindui/tabs/app/+not-found.tsx.ejs',
-      'packages/nativewindui/tabs/app/+html.tsx.ejs'
+      'packages/nativewindui/tabs/app/+not-found.tsx.ejs'
     ];
 
     const nativewindUIDrawerFiles = [
@@ -105,8 +113,7 @@ export function configureProjectFiles(
       'packages/nativewindui/drawer/app/(drawer)/(tabs)/index.tsx.ejs',
       'packages/nativewindui/drawer/app/(drawer)/(tabs)/two.tsx.ejs',
       'packages/nativewindui/drawer/app/modal.tsx.ejs',
-      'packages/nativewindui/drawer/app/+not-found.tsx.ejs',
-      'packages/nativewindui/drawer/app/+html.tsx.ejs'
+      'packages/nativewindui/drawer/app/+not-found.tsx.ejs'
     ];
 
     if (navigationPackage?.options?.type === 'stack') {
@@ -245,7 +252,11 @@ export function configureProjectFiles(
     // add expo router files if needed
     // modify base files with expo router specifications
     if (navigationPackage?.name === 'expo-router') {
-      let expoRouterFiles = ['packages/expo-router/expo-env.d.ts', 'packages/expo-router/metro.config.js.ejs'];
+      let expoRouterFiles = [
+        'packages/expo-router/expo-env.d.ts',
+        'packages/expo-router/metro.config.js.ejs',
+        'packages/expo-router/app/+html.tsx.ejs'
+      ];
 
       if (stylingPackage?.name === 'nativewind') {
         expoRouterFiles.push('packages/nativewind/components/Container.tsx.ejs');
@@ -266,8 +277,7 @@ export function configureProjectFiles(
           'packages/expo-router/stack/app/_layout.tsx.ejs',
           'packages/expo-router/stack/app/details.tsx.ejs',
           'packages/expo-router/stack/app/index.tsx.ejs',
-          'packages/expo-router/stack/app/+not-found.tsx.ejs',
-          'packages/expo-router/stack/app/+html.tsx.ejs'
+          'packages/expo-router/stack/app/+not-found.tsx.ejs'
         ];
         // add the necessary components for the navigation
       } else if (navigationPackage?.options?.type === 'tabs') {
@@ -279,8 +289,7 @@ export function configureProjectFiles(
           'packages/expo-router/tabs/app/(tabs)/two.tsx.ejs',
           'packages/expo-router/tabs/app/_layout.tsx.ejs',
           'packages/expo-router/tabs/app/modal.tsx.ejs',
-          'packages/expo-router/tabs/app/+not-found.tsx.ejs',
-          'packages/expo-router/tabs/app/+html.tsx.ejs'
+          'packages/expo-router/tabs/app/+not-found.tsx.ejs'
         ];
         // add the necessary components for the navigation
         expoRouterFiles.push('base/components/TabBarIcon.tsx.ejs');
@@ -291,7 +300,6 @@ export function configureProjectFiles(
           ...expoRouterFiles,
           'packages/expo-router/drawer/app/_layout.tsx.ejs',
           'packages/expo-router/drawer/app/+not-found.tsx.ejs',
-          'packages/expo-router/drawer/app/+html.tsx.ejs',
           'packages/expo-router/drawer/app/(drawer)/_layout.tsx.ejs',
           'packages/expo-router/drawer/app/(drawer)/index.tsx.ejs',
           'packages/expo-router/drawer/app/(drawer)/(tabs)/_layout.tsx.ejs',
@@ -329,7 +337,7 @@ export function configureProjectFiles(
     }
 
     // add vexo analytics files if needed
-    if (analyticsPackage?.name == 'vexo-analytics') {
+    if (analyticsPackage?.name === 'vexo-analytics') {
       const vexoFiles = ['packages/vexo-analytics/.env.ejs'];
 
       files = [...files, ...vexoFiles];

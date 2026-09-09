@@ -41,6 +41,7 @@ export function generateProjectFiles(
       target = target.replace('packages/nativewind/', '');
     } else if (stylingPackage?.name === 'nativewindui') {
       target = target.replace('packages/nativewindui/', '');
+      target = target.replace('packages/nativewind/', '');
     }
 
     if (navigationPackage?.name === 'react-navigation') {

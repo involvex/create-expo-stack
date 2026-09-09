@@ -4,18 +4,14 @@
     <% if (props.flags.importAlias) { %>
     "strict": true,
     "baseUrl": ".",
-    "paths": {
-      <% if (props.stylingPackage?.name === 'nativewindui') { %>
-        "@/*": [ "./*" ]
-      <% } else { %>  
-        <% if  (props.navigationPackage?.name === "expo-router" && props.flags.importAlias === true) { %>
-        "@/*": ["*"]
-        <% } else if  (props.flags.importAlias === true) { %>
-        "@/*": ["src/*"]
+      "paths": {
+        <% if (props.stylingPackage?.name === 'nativewindui') { %>
+          "@/*": ["./*"]
+        <% } else if (props.flags.importAlias === true) { %>
+          "@/*": ["*"]
         <% } else { %>
-        "<%= props.flags.importAlias %>": ["src/*"]
+          "<%= props.flags.importAlias %>": ["src/*"]
         <% } %>
-      <% } %>
     }
     <% } else { %>
       "strict": true
